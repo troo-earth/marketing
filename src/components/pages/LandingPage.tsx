@@ -33,14 +33,13 @@ const LandingPage = () => {
             </div>
 
             {/* --- HALF GLOBE SECTION --- */}
-            <div className="relative mt-20 h-[500px] overflow-hidden pointer-events-none">
+            <div className="relative mt-20 h-[500px] overflow-hidden cursor-grab">
                 <Globe
                     className="
             absolute
-            left-1/2 -translate-x-1/2
-            top-40
-            scale-[1.75]           /* <<< BIGGER globe */
-            w-[1000px]             /* <<< Forces large rendered canvas size */
+            top-[44%]            
+            scale-[2]           
+            w-[1000px]           
           "
                 />
             </div>
