@@ -1,5 +1,5 @@
 // src/components/LandingPage.tsx
-import { Globe } from '../ui/globe';
+import { Globe } from '../ui/Globe';
 
 const LandingPage = () => {
     return (
