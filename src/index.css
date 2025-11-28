@@ -19,7 +19,18 @@
 body {
   font-family: var(--font-family-nunito);
 }
+@layer utilities {
+  .bg-primary-gradient {
+    background-image: var(--background-image-primary-gradient);
+  }
 
+  .text-primary-gradient {
+    background-image: var(--background-image-primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
 /* @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
