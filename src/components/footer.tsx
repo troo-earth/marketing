@@ -5,10 +5,10 @@ import FooterWaterMark from "../../public/assets/footerwatermark.svg";
 
 const Footer = () => {
   return (
-    <footer className="w-full px-6 pb-10 pt-4">
-      <div className="w-full rounded-3xl bg-primary-gradient-vertical text-white overflow-hidden flex">
+    <footer className="w-full  px-6 pb-10 pt-4">
+<div className="w-full max-h-[301px] h-full rounded-3xl bg-primary-gradient-vertical text-white overflow-hidden flex">
         {/* ✅ LEFT CONTENT AREA */}
-        <div className="flex-1 px-12 py-14 flex flex-col justify-between">
+        <div className="flex-1 px-12 py-10 flex flex-col justify-between">
           {/* ✅ Top Section */}
           <div className="flex flex-col lg:flex-row justify-between gap-12 items-start">
             {/* ✅ Left Brand + Social */}

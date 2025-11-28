@@ -3,13 +3,16 @@ import Xpansive from "../../../public/assets/XpansivConnect.svg";
 
 const PartnersSection = () => {
   return (
-    <section className="
+    <section
+      className="
       w-full 
       bg-[#EAF5F3]
-      py-10 sm:py-12 md:py-16
+      max-h-[257px]
       px-4 sm:px-6
-    ">
-      <div className="
+    "
+    >
+      <div
+        className="
         max-w-7xl 
         mx-auto 
         flex 
@@ -19,17 +22,19 @@ const PartnersSection = () => {
         justify-between
         px-4 sm:px-8 md:px-14
         py-6 md:py-10
-      ">
-
+      "
+      >
         {/* Left Title */}
         <div className="mb-8 md:mb-0 text-center md:text-left">
-          <h2 className="
+          <h2
+            className="
             text-primary-gradient
             bg-clip-text text-transparent 
             font-black 
             text-[50px] leading-[40px] md:leading-[60px]
             
-          ">
+          "
+          >
             Meet Our
             <br />
             Partners
@@ -37,13 +42,14 @@ const PartnersSection = () => {
         </div>
 
         {/* Right Logos */}
-        <div className="
+        <div
+          className="
           flex 
           flex-col sm:flex-row 
           items-center 
           gap-8 sm:gap-16 md:gap-24
-        ">
-
+        "
+        >
           {/* X Carbon — 312 × 102 */}
           <div className="flex items-center gap-4 sm:gap-6">
             <img
@@ -70,7 +76,6 @@ const PartnersSection = () => {
               "
             />
           </div>
-
         </div>
       </div>
     </section>
