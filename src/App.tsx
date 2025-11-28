@@ -5,6 +5,8 @@ import EnterpriseHero from './components/pages/EnterpriseHero';
 import PartnersSection from './components/pages/Partners';
 import PlatformActionsSection from './components/pages/PlatformActions';
 import MeetTheTeam from './components/pages/MeetTeam';
+import Contact from './components/pages/Contact';
+import Footer from './components/footer';
 
 function App() {
   return (
@@ -19,6 +21,10 @@ function App() {
       <PartnersSection />
       <PlatformActionsSection />
       <MeetTheTeam />
+      <Contact />
+      <div className="bg-main-gradient px-10 pt-10 relative overflow-hidden">
+        <Footer />
+      </div>
     </>
   );
 }
