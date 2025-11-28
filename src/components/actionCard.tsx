@@ -23,7 +23,7 @@ const CarbonActionCard = ({
       />
 
       {/* Top Accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-[6px] bg-yellow-400 rounded-b-lg z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-[6px] bg-accent rounded-b-lg z-10" />
 
       {/* ✅ ICON + TITLE ROW (SIDE BY SIDE) */}
       <div className="flex items-center gap-4 relative z-10">

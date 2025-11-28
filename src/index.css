@@ -4,16 +4,20 @@
 @custom-variant dark (&:is(.dark *));
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200..1000;1,200..1000&display=swap'); */
 
+
 @theme {
   --font-family-nunito: "Nunito Sans", sans-serif;
 
   --color-primary: #007473;
   --color-secondary: #173E35;
+  --color-accent: #FFB71B;
 
   --background-image-hero-gradient: linear-gradient(to bottom, #007473 14%, #ffffff 100%);
   --background-image-primary-gradient: linear-gradient(to right, #173E35 18%, #007473 100%);
   --background-image-main-gradient: linear-gradient(to top, #80b9b9 0%, #FFFFFF 100%);
+  --background-image-primary-gradient-vertical: linear-gradient(to bottom, #173E35 18%, #007473 100%);
 }
+
 
 /* Global font application */
 body {
@@ -24,13 +28,39 @@ body {
     background-image: var(--background-image-primary-gradient);
   }
 
+  .bg-primary-gradient-vertical {
+    background-image: var(--background-image-primary-gradient-vertical);
+  }
+
   .text-primary-gradient {
     background-image: var(--background-image-primary-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
+
+  .text-primary-gradient-vertical {
+    background-image: var(--background-image-primary-gradient-vertical);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ✅ Accent Utilities */
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+  }
+
+  .border-accent {
+    border-color: var(--color-accent);
+  }
 }
+
+
 /* @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
