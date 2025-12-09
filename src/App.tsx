@@ -6,7 +6,7 @@ import PartnersSection from './components/pages/Partners';
 import PlatformActionsSection from './components/pages/PlatformActions';
 import MeetTheTeam from './components/pages/MeetTeam';
 import Contact from './components/pages/Contact';
-import Footer from './components/footer';
+import Footer from './components/ui/footer';
 
 function App() {
   return (

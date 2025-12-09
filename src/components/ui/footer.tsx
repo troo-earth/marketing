@@ -1,7 +1,7 @@
-import Insta from "../../public/assets/insta.svg";
-import XIcon from "../../public/assets/x.svg";
-import Linkedin from "../../public/assets/linkedin.svg";
-import FooterWaterMark from "../../public/assets/footerwatermark.svg";
+import Insta from "../../../public/assets/insta.svg";
+import XIcon from "../../../public/assets/x.svg";
+import Linkedin from "../../../public/assets/linkedin.svg";
+import FooterWaterMark from "../../../public/assets/footerwatermark.svg";
 
 const Footer = () => {
   return (
