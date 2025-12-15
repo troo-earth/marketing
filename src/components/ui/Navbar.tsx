@@ -36,7 +36,7 @@ const Navbar = () => {
                 {['Solutions', 'Pricing', 'Contact', 'Company'].map((item) => (
                   <a
                     key={item}
-                    href={`#${item.toLowerCase()}`}
+                    href={`/${item.toLowerCase()}`}
                     className={`font-medium transition-colors ${scrolled
                         ? 'text-secondary hover:text-primary'
                         : 'text-secondary hover:text-primary'
