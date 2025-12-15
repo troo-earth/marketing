@@ -1,5 +1,4 @@
 // src/pages/PaymentSuccessPage.tsx
-import React from 'react';
 import { motion } from 'framer-motion';
 
 // Reusing the CheckIcon style from the pricing page for consistency
@@ -25,7 +24,14 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      stiffness: 100,        // Keeps the same feel
+      damping: 15,        // Optional: add if you want to fine-tune (default is good)
+    },
+  },
 };
 
 const PaymentSuccessPage = () => {
