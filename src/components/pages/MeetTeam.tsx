@@ -3,7 +3,7 @@ import TreePlant from "../../../public/assets/treeplant.svg";
 const MeetTheTeam = () => {
   return (
     <section className="w-full h-auto xl:h-screen bg-[#EAF5F3] py-10 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-6">
-      <div className="max-w-7xl mx-auto flex flex-col xl:flex-row items-start gap-8 sm:gap-12 md:gap-16">
+      <div className="max-w-7xl mx-auto flex flex-col xl:flex-row xl:items-center gap-8 sm:gap-12 md:gap-16">
         {/* LEFT CONTENT */}
         <div className="w-full xl:w-[50%] xl:px-12">
           {/* Heading */}

@@ -1,4 +1,4 @@
-import CarbonActionCard from "../actionCard";
+import CarbonActionCard from "../ui/actionCard";
 import Forest from "../../../public/assets/forest.png";
 
 import ShoppingCart from "../../../public/assets/Shopping.svg";
