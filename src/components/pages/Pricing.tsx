@@ -110,112 +110,126 @@ const PricingPage = () => {
   }, []);
 
   return (
-    // FIX: Added 'overflow-x-hidden' to prevent the blob from causing horizontal scroll
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-blue-50 relative flex items-center justify-center overflow-x-hidden">
+    // MAIN PARENT
+    // min-h-screen: Enables window scrolling if content gets too tall
+    // flex-col lg:flex-row: standard layout
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-blue-50 relative flex flex-col lg:flex-row overflow-x-hidden">
       
       {/* Decorative background blob */}
-      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none z-0" />
 
-      {/* Main Container */}
-      <div className="w-full max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+      {/* --- LEFT SIDE (Sticky) --- */}
+      {/* lg:sticky lg:top-0 lg:h-screen: 
+         This locks the left side in place while the right side scrolls.
+      */}
+      <div className="w-full lg:w-1/2 lg:h-screen lg:sticky lg:top-0 flex flex-col justify-center px-6 lg:px-16 py-12 lg:py-0 relative z-10">
+        <div className="max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
           
-          {/* LEFT SIDE: Marketing Copy */}
-          <div className="flex flex-col justify-center max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
-            
-            <h1 
-              className={`text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary mb-6 transition-all duration-1000 ease-out transform ${
-                animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
-              Simple, Transparent <br /> Pricing
-            </h1>
-            
-            <p 
-              className={`text-lg text-secondary mb-8 leading-relaxed transition-all duration-1000 delay-100 ease-out transform ${
-                animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
-              One plan. Unlimited access. Built for enterprises serious about climate impact. No hidden fees.
-            </p>
+          <h1 
+            className={`text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary mb-6 transition-all duration-1000 ease-out transform ${
+              animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            Simple, Transparent <br /> Pricing
+          </h1>
+          
+          <p 
+            className={`text-lg text-secondary mb-8 leading-relaxed transition-all duration-1000 delay-100 ease-out transform ${
+              animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            One plan. Unlimited access. Built for enterprises serious about climate impact. No hidden fees.
+          </p>
 
-            <div 
-              className={`space-y-4 mb-8 inline-block text-left transition-all duration-1000 delay-200 ease-out transform ${
-                animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
-              {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center text-gray-700">
-                  <CheckIcon />
-                  <span className="text-base font-medium">{feature}</span>
-                </div>
-              ))}
-            </div>
-
-            <div 
-              className={`hidden lg:block pt-8 border-t border-gray-100 transition-all duration-1000 delay-300 ease-out transform ${
-                animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
-                <p className="text-sm text-gray-400 font-medium">Trusted by leading green enterprises</p>
-            </div>
+          <div 
+            className={`space-y-4 mb-8 inline-block text-left transition-all duration-1000 delay-200 ease-out transform ${
+              animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            {features.map((feature, idx) => (
+              <div key={idx} className="flex items-center text-gray-700">
+                <CheckIcon />
+                <span className="text-base font-medium">{feature}</span>
+              </div>
+            ))}
           </div>
 
-          {/* RIGHT SIDE: Payment Card */}
           <div 
-            className={`w-full flex justify-center lg:justify-end transition-all duration-1000 delay-500 ease-out transform ${
+            className={`hidden lg:block pt-8 border-t border-gray-100 transition-all duration-1000 delay-300 ease-out transform ${
+              animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <p className="text-sm text-gray-400 font-medium">Trusted by leading green enterprises</p>
+          </div>
+        </div>
+      </div>
+
+      {/* --- RIGHT SIDE (Centered & Safe Expansion) --- */}
+      <div className="w-full lg:w-1/2 relative z-10">
+        {/* KEY FIX:
+           1. flex flex-col: Allows vertical stacking
+           2. pt-28 lg:pt-36: Hard top padding ensures card is pushed down below the Navbar area.
+           3. NO 'items-center': This prevents top expansion.
+        */}
+        <div className="min-h-screen w-full flex flex-col p-6 lg:p-12 pt-28 lg:pt-36 pb-12">
+            
+          {/* KEY FIX CONTINUED:
+             4. my-auto: This auto-centers the card in the available vertical space.
+             If space runs out (expansion), it hits the top padding and grows DOWN.
+          */}
+          <div 
+            className={`w-full max-w-md mx-auto my-auto transition-all duration-1000 delay-500 ease-out transform ${
                 animateText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             }`}
           >
-            <div className="w-full max-w-md">
-              <div className="bg-white rounded-3xl shadow-2xl shadow-blue-900/5 border border-white/50 p-6 sm:p-8 relative overflow-hidden">
-                
-                {/* Header of Card */}
-                <div className="flex justify-between items-end mb-8 border-b border-gray-100 pb-6">
-                  <div>
-                    <h3 className="text-gray-900 font-bold text-lg">Enterprise Plan</h3>
-                    <p className="text-gray-500 text-sm mt-1">Instant Activation</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-3xl font-extrabold text-primary">$20</span>
-                    <span className="text-gray-400 text-sm ml-1 font-medium">/one-time</span>
-                  </div>
+            <div className="bg-white rounded-3xl shadow-2xl shadow-blue-900/5 border border-white/50 p-6 sm:p-8 relative overflow-hidden">
+              
+              {/* Header of Card */}
+              <div className="flex justify-between items-end mb-8 border-b border-gray-100 pb-6">
+                <div>
+                  <h3 className="text-gray-900 font-bold text-lg">Enterprise Plan</h3>
+                  <p className="text-gray-500 text-sm mt-1">Instant Activation</p>
                 </div>
-
-                {/* Body of Card */}
-                {errorMessage ? (
-                    <div className="flex flex-col items-center justify-center py-10 text-center">
-                      <p className="text-red-500 mb-4 font-medium">{errorMessage}</p>
-                      <button onClick={() => window.location.reload()} className="text-sm text-primary hover:underline">Reload Page</button>
-                    </div>
-                ) : clientSecret ? (
-                  <Elements 
-                    stripe={stripePromise} 
-                    options={{ 
-                      clientSecret,
-                      appearance: { 
-                        theme: 'stripe',
-                        variables: {
-                          colorPrimary: '#0f172a',
-                          borderRadius: '12px',
-                        }
-                      } 
-                    }}
-                  >
-                    <CheckoutForm />
-                  </Elements>
-                ) : (
-                  <div className="py-20 flex flex-col items-center justify-center space-y-4">
-                    <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-                    <p className="text-gray-400 text-sm animate-pulse">Preparing checkout...</p>
-                  </div>
-                )}
+                <div className="text-right">
+                  <span className="text-3xl font-extrabold text-primary">$20</span>
+                  <span className="text-gray-400 text-sm ml-1 font-medium">/one-time</span>
+                </div>
               </div>
+
+              {/* Body of Card */}
+              {errorMessage ? (
+                  <div className="flex flex-col items-center justify-center py-10 text-center">
+                    <p className="text-red-500 mb-4 font-medium">{errorMessage}</p>
+                    <button onClick={() => window.location.reload()} className="text-sm text-primary hover:underline">Reload Page</button>
+                  </div>
+              ) : clientSecret ? (
+                <Elements 
+                  stripe={stripePromise} 
+                  options={{ 
+                    clientSecret, 
+                    appearance: { 
+                      theme: 'stripe', 
+                      variables: { 
+                        colorPrimary: '#0f172a',
+                        borderRadius: '12px',
+                      } 
+                    } 
+                  }}
+                >
+                  <CheckoutForm />
+                </Elements>
+              ) : (
+                <div className="py-20 flex flex-col items-center justify-center space-y-4">
+                  <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                  <p className="text-gray-400 text-sm animate-pulse">Preparing checkout...</p>
+                </div>
+              )}
             </div>
+            
           </div>
-          
         </div>
       </div>
+      
     </div>
   );
 };
