@@ -1,5 +1,6 @@
 // src/components/Navbar.tsx
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import logo from '../../assets/mainLogo.svg'; // Update the path as necessary  
 
 const Navbar = () => {
@@ -50,24 +51,24 @@ const Navbar = () => {
 
             {/* Right Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <a
-                href="/login"
+              <Link
+                to="/login"
                 className={`font-medium transition-colors ${scrolled
                     ? 'text-gray-600 hover:text-gray-900'
                     : 'text-secondary hover:text-primary'
                   }`}
               >
                 Login
-              </a>
-              <a
-                href="/signup"
+              </Link>
+              <Link
+                to="/signup"
                 className={`px-6 py-2.5 rounded-3xl font-semibold transition-all ${scrolled
                     ? 'bg-primary hover:bg-secondary text-white'
                     : 'bg-primary hover:bg-secondary text-white'
                   }`}
               >
                 Sign Up
-              </a>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -103,13 +104,13 @@ const Navbar = () => {
                 </a>
               ))}
               <div className="pt-4 space-y-3 border-t">
-                <a href="/login" className="block text-secondary font-medium hover:text-primary">Login</a>
-                <a
-                  href="/signup"
+                <Link to="/login" className="block text-secondary font-medium hover:text-primary">Login</Link>
+                <Link
+                  to="/signup"
                   className="block text-center bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 hover:shadow-lg"
                 >
                   Sign Up
-                </a>
+                </Link>
               </div>
             </div>
           </div>

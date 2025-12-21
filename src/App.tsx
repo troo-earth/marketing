@@ -1,38 +1,47 @@
 // src/App.tsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/ui/Navbar';
-import LandingPage from './components/pages/LandingPage';
-import EnterpriseHero from './components/pages/EnterpriseHero';
-import PartnersSection from './components/pages/Partners';
-import PlatformActionsSection from './components/pages/PlatformActions';
-import MeetTheTeam from './components/pages/MeetTeam';
-import Contact from './components/pages/Contact';
-import Footer from './components/footer';
-import PricingPage from './components/pages/Pricing';
-import PaymentSuccessPage from './components/pages/PaymentSuccess';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function HomePage() {
-  return (
-    <>
-      {/* Hero section with your gradient */}
-      <main className="bg-main-gradient px-10 pt-40 relative overflow-hidden">
-        <LandingPage />
-      </main>
-      <EnterpriseHero />
-      <PartnersSection />
-      <PlatformActionsSection />
-      <MeetTheTeam />
-      <Contact />
-      <div className="bg-main-gradient px-10 pt-10 relative overflow-hidden">
-        <Footer />
-      </div>
-    </>
-  );
-}
+import Navbar from "./components/ui/Navbar";
+import Footer from "./components/ui/footer";
+
+import LandingPage from "./components/pages/LandingPage";
+import EnterpriseHero from "./components/pages/EnterpriseHero";
+import PartnersSection from "./components/pages/Partners";
+import PlatformActionsSection from "./components/pages/PlatformActions";
+import MeetTheTeam from "./components/pages/MeetTeam";
+import Contact from "./components/pages/Contact";
+
+import PricingPage from "./components/pages/Pricing";
+import PaymentSuccessPage from "./components/pages/PaymentSuccess";
+
+import Login from "./components/pages/auth/Login";
+import Signup from "./components/pages/auth/signup";
+
+/* ---------------- Home / Marketing Page ---------------- */
+
+const HomePage = () => (
+  <>
+    <main className="bg-main-gradient px-10 pt-40 relative overflow-hidden">
+      <LandingPage />
+    </main>
+
+    <EnterpriseHero />
+    <PartnersSection />
+    <PlatformActionsSection />
+    <MeetTheTeam />
+    <Contact />
+
+    <div className="bg-main-gradient px-10 pt-10 relative overflow-hidden">
+      <Footer />
+    </div>
+  </>
+);
+
+/* ---------------- App ---------------- */
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <div className="min-h-screen flex flex-col">
         <Navbar />
 
@@ -40,12 +49,11 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/payment-success" element={<PaymentSuccessPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
-
-        {/* Footer can stay here if you want it on every page */}
-        {/* Or move it inside HomePage if you only want it on home */}
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
