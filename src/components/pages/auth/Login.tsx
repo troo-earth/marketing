@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Eye, EyeOff, Leaf, ArrowRight } from "lucide-react";
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);

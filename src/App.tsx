@@ -15,7 +15,7 @@ import PricingPage from "./components/pages/Pricing";
 import PaymentSuccessPage from "./components/pages/PaymentSuccess";
 
 import Login from "./components/pages/auth/Login";
-import Signup from "./components/pages/auth/signup";
+import Signup from "./components/pages/auth/Signup";
 
 /* ---------------- Home / Marketing Page ---------------- */
 
