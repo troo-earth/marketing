@@ -94,7 +94,7 @@ const PricingPage = () => {
   ];
 
   useEffect(() => {
-    fetch('https://api.troo.earth/api/v1/payments/create-intent', {
+    fetch('http://localhost:3000/api/v1/payments/create-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     })
