@@ -1,4 +1,4 @@
-import { TrendingUp, ShieldCheck, Zap, Globe, Gauge } from "lucide-react";
+import { TrendingUp, ShieldCheck, Zap, Gauge } from "lucide-react";
 
 const MarketOpportunity = () => {
   const userBenefits = [
