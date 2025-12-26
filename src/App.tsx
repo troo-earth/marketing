@@ -1,51 +1,94 @@
 // src/App.tsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/ui/Navbar';
-import LandingPage from './components/pages/LandingPage';
-import EnterpriseHero from './components/pages/EnterpriseHero';
-import PartnersSection from './components/pages/Partners';
-import PlatformActionsSection from './components/pages/PlatformActions';
-import MeetTheTeam from './components/pages/MeetTeam';
-import Contact from './components/pages/Contact';
-import Footer from './components/ui/footer';
-import PricingPage from './components/pages/Pricing';
-import PaymentSuccessPage from './components/pages/PaymentSuccess';
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
-function HomePage() {
-  return (
-    <>
-      {/* Hero section with your gradient */}
-      <main className="bg-main-gradient px-10 pt-40 relative overflow-hidden">
-        <LandingPage />
-      </main>
-      <EnterpriseHero />
-      <PartnersSection />
-      <PlatformActionsSection />
-      <MeetTheTeam />
-      <Contact />
-      <div className="bg-main-gradient px-10 pt-10 relative overflow-hidden">
-        <Footer />
-      </div>
-    </>
-  );
-}
+/* ---------- UI Shell ---------- */
+import Navbar from "./components/ui/Navbar";
+import Footer from "./components/ui/footer";
+
+/* ---------- Pages ---------- */
+import LandingPage from "./components/pages/LandingPage";
+import PlatformActionsSection from "./components/pages/PlatformActions";
+import MeetTheTeam from "./components/pages/MeetTeam";
+import Contact from "./components/pages/Contact";
+import PricingPage from "./components/pages/Pricing";
+import PaymentSuccessPage from "./components/pages/PaymentSuccess";
+import Solutions from "./components/pages/Solutions";
+import Company from "./components/pages/Company";
+import Marketplace from "./components/pages/Marketplace";
+import WhatWeDo from "./components/pages/WhatWeDo";
+import MarketOpportunity from "./components/pages/MarketOpportunity"
+
+
+/* ---------- Layouts ---------- */
+
+const MarketingLayout = () => (
+  <>
+    <Navbar />
+    <Outlet />
+    <Footer />
+  </>
+);
+
+const AuthLayout = () => <Outlet />;
+
+/* ---------- Composite Pages ---------- */
+
+const HomePage = () => (
+  <>
+    <main className=" pt-40 relative overflow-hidden">
+      <LandingPage />
+    </main>
+    
+    <PlatformActionsSection />
+    <WhatWeDo />
+    <MarketOpportunity />
+    <MeetTheTeam />
+    <Contact />
+  </>
+);
+
+/* ---------- App Root ---------- */
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
+    <>
+      {/* Global Toast System */}
+      <Toaster
+        position="top-right"
+        gutter={12}
+        toastOptions={{
+          duration: 3000,
+          style: {
+            borderRadius: "14px",
+            fontWeight: 600,
+            background: "#ffffff",
+            color: "#0f172a",
+            boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+          },
+        }}
+      />
 
+      {/* Router */}
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/payment-success" element={<PaymentSuccessPage />} />
-        </Routes>
+          {/* Marketing pages (with navbar & footer) */}
+          <Route element={<MarketingLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/payment-success" element={<PaymentSuccessPage />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/company" element={<Company />} />
+            <Route path="/contacts" element={<Contact />} />
+          </Route>
 
-        {/* Footer can stay here if you want it on every page */}
-        {/* Or move it inside HomePage if you only want it on home */}
-      </div>
-    </Router>
+          {/* Auth pages (no navbar/footer) */}
+          <Route element={<AuthLayout />}>
+            <Route path="/marketplace" element={<Marketplace />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

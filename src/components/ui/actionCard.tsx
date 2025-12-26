@@ -1,4 +1,4 @@
-import Troo from "../../../public/assets/troobg.svg";
+import Troo from "/assets/troobg.svg";
 
 interface CarbonActionCardProps {
   title: string;

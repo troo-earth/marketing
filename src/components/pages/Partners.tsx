@@ -1,5 +1,5 @@
-import XCarbon from "../../../public/assets/XCarbon.svg";
-import Xpansive from "../../../public/assets/XpansivConnect.svg";
+import XCarbon from "/assets/XCarbon.svg";
+import Xpansive from "/assets/XpansivConnect.svg";
 
 const PartnersSection = () => {
   return (

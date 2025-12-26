@@ -17,7 +17,10 @@
   --background-image-main-gradient: linear-gradient(to top, #80b9b9 0%, #FFFFFF 100%);
   --background-image-primary-gradient-vertical: linear-gradient(to bottom, #173E35 18%, #007473 100%);
 }
-
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
 
 /* Global font application */
 body {
@@ -58,6 +61,15 @@ body {
   .border-accent {
     border-color: var(--color-accent);
   }
+}
+@keyframes float {
+  0% { transform: translateY(0px) rotate(var(--tw-rotate)); }
+  50% { transform: translateY(-12px) rotate(var(--tw-rotate)); }
+  100% { transform: translateY(0px) rotate(var(--tw-rotate)); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 
