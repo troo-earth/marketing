@@ -1,6 +1,5 @@
 import { useState } from "react";
-import troowhite from "/assets/trooearthwhite.svg";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Mail, Globe, ArrowRight } from "lucide-react";
 
 const Contact = () => {
   const [showToast, setShowToast] = useState(false);
@@ -14,194 +13,157 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Show toast
     setShowToast(true);
-    
-    // Clear form
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      company: "",
-      message: ""
-    });
-    
-    // Hide toast after 3 seconds
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
+    setFormData({ firstName: "", lastName: "", email: "", company: "", message: "" });
+    setTimeout(() => setShowToast(false), 3000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <section id="contact-us" className="w-full h-auto flex items-center justify-center py-12 sm:py-16 md:py-20 px-6 md:px-12 lg:px-24 relative overflow-hidden bg-[var(--background-image-main-gradient)]">
+    <section id="contact-us" className="w-full min-h-screen relative flex items-center justify-center py-20 px-6 md:px-12 lg:px-20 xl:px-24 bg-[var(--background-image-main-gradient)] font-nunito overflow-hidden">
       
       {/* Toast Notification */}
-      <div 
-        className={`fixed top-24 right-6 z-[100] transition-all duration-500 ${
-          showToast 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 -translate-y-4 pointer-events-none'
-        }`}
-      >
+      <div className={`fixed top-24 right-6 z-[100] transition-all duration-500 ${showToast ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
         <div className="bg-white rounded-2xl shadow-2xl border border-primary/20 px-6 py-4 flex items-center gap-3 backdrop-blur-xl">
-          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-            <CheckCircle2 className="text-primary" size={20} />
-          </div>
+          <CheckCircle2 className="text-primary" size={20} />
           <div>
-            <p className="font-bold text-secondary text-sm">Message Sent!</p>
-            <p className="text-gray-500 text-xs">We'll get back to you soon.</p>
+            <p className="font-black text-secondary text-sm">Transmission Received</p>
+            <p className="text-gray-500 text-xs font-medium">Our team will respond shortly.</p>
           </div>
         </div>
       </div>
 
-      {/* --- BRANDED BACKGROUND ELEMENTS (POP OF COLOUR) --- */}
+      {/* --- ATMOSPHERIC ELEMENTS --- */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Top-Right: Warm Accent Pop */}
-        <div className="absolute top-[-10%] right-[10%] w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px] animate-pulse" />
-        
-        {/* Bottom-Left: Strong Primary Teal Pop */}
-        <div className="absolute bottom-[5%] left-[-5%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
-        
-        {/* Center-Right: Soft Primary Glow behind the form */}
-        <div className="absolute top-[40%] right-[-5%] w-[300px] h-[300px] bg-primary/10 rounded-full blur-[80px]" />
-        
-        {/* Signature Noise Texture */}
+        <div className="absolute top-[-10%] right-[10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-5%] left-[-5%] w-[600px] h-[600px] bg-primary/15 rounded-full blur-[140px]" />
         <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       </div>
 
-      {/* Main Card */}
-      <div className="relative z-10 w-full max-w-[1192px] bg-white rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row shadow-[0_50px_100px_-20px_rgba(23,62,53,0.15)] border border-white/50 backdrop-blur-sm">
-        
-        {/* LEFT PANEL */}
-        <div className="relative w-full lg:w-[42%] bg-primary-gradient-vertical text-white p-10 md:p-16 flex flex-col justify-between overflow-hidden">
-          {/* Subtle pattern overlay */}
-          <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_white_1px,_transparent_1px)] bg-[size:30px_30px]" />
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto">
+        {/* Layout Wrapper */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch">
           
-          {/* Logo */}
-          <div className="relative z-10 pb-5 xl:pb-0 flex items-center justify-center lg:justify-start">
-            <img
-              src={troowhite}
-              alt="troo.earth logo"
-              className="h-8 xl:h-12 w-auto object-contain transition-transform hover:scale-105"
-            />
-          </div>
+          {/* LEFT: BRAND INFO & METADATA (5 Columns equivalent) */}
+          <div className="w-full lg:w-[40%] flex flex-col justify-between">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/5 mb-8">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Global Inquiries</span>
+              </div>
+              
+              <h2 className="text-secondary font-black text-[38px] md:text-[50px] xl:text-[64px] leading-[1.05] tracking-tighter mb-8">
+                Ready to scale <br />
+                <span className="text-primary-gradient italic tracking-normal inline-block pr-3">your impact?</span>
+              </h2>
+              
+              <p className="text-gray-500 font-medium text-lg lg:text-xl leading-relaxed max-w-md">
+                Connect with our infrastructure specialists to deploy verified carbon solutions for your organization.
+              </p>
+            </div>
 
-          {/* Message */}
-          <div className="relative z-10">
-            <p className="text-[20px] font-medium text-center lg:text-left leading-relaxed opacity-90">
-              Let's talk. Whether you need help, insights, or next steps, we're
-              just a message away.
-            </p>
-          </div>
-
-          {/* Bottom Branding Detail */}
-          <div className="relative z-10 hidden lg:block">
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] opacity-40">
-              Moving the planet forward
-            </p>
-          </div>
-
-          {/* Yellow Notch - Flush with the seam */}
-          <div className="absolute right-0 top-1/4 w-[6px] h-[80px] bg-accent rounded-l-full shadow-[0_0_20px_rgba(255,183,27,0.4)]" />
-        </div>
-
-        {/* RIGHT FORM */}
-        <div className="w-full lg:w-[58%] bg-white p-10 md:p-16 relative">
-          <div className="max-w-xl mx-auto">
-            <h3 className="text-secondary font-black text-[35px] mb-10 tracking-tighter leading-none">
-              Get In Touch
-            </h3>
-
-            <form className="space-y-8" onSubmit={handleSubmit}>
-              {/* Row 1 */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div className="relative group">
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    placeholder="First Name"
-                    className="w-full border-0 border-b border-secondary/20 bg-transparent text-secondary placeholder:text-secondary/40 focus:outline-none focus:border-primary py-2 transition-colors"
-                    required
-                  />
-                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-focus-within:w-full" />
+            {/* Technical Contact Points */}
+            <div className="mt-12 space-y-6">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/40 border border-white/60 backdrop-blur-xl group hover:bg-white/60 transition-all">
+                <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/10">
+                  <Mail size={20} />
                 </div>
-                <div className="relative group">
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    placeholder="Last Name"
-                    className="w-full border-0 border-b border-secondary/20 bg-transparent text-secondary placeholder:text-secondary/40 focus:outline-none focus:border-primary py-2 transition-colors"
-                    required
-                  />
-                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-focus-within:w-full" />
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-primary/60">Email Access</p>
+                  <p className="text-secondary font-black text-sm">support@troo.earth</p>
                 </div>
               </div>
 
-              {/* Row 2 */}
-              <div className="relative group">
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Email"
-                  className="w-full border-0 border-b border-secondary/20 bg-transparent text-secondary placeholder:text-secondary/40 focus:outline-none focus:border-primary py-2 transition-colors"
-                  required
-                />
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-focus-within:w-full" />
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/40 border border-white/60 backdrop-blur-xl group hover:bg-white/60 transition-all">
+                <div className="w-12 h-12 rounded-xl bg-secondary text-white flex items-center justify-center shadow-lg">
+                  <Globe size={20} />
+                </div>
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-primary/60">Global Operations</p>
+                  <p className="text-secondary font-black text-sm">Available in 24+ Markets</p>
+                </div>
               </div>
+            </div>
+          </div>
 
-              {/* Row 3 */}
-              <div className="relative group">
-                <input
-                  type="text"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleChange}
-                  placeholder="Company Name"
-                  className="w-full border-0 border-b border-secondary/20 bg-transparent text-secondary placeholder:text-secondary/40 focus:outline-none focus:border-primary py-2 transition-colors"
-                  required
-                />
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-focus-within:w-full" />
-              </div>
+          {/* RIGHT: THE FORM (60% Width) */}
+          <div className="w-full lg:w-[60%]">
+            <div className="relative p-8 md:p-12 lg:p-16 rounded-[3rem] bg-white/40 backdrop-blur-2xl border border-white/80 shadow-[0_40px_80px_-20px_rgba(23,62,53,0.12)]">
+              {/* Subtle Pattern Overlay */}
+              <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(circle_at_center,_#173E35_1px,_transparent_1px)] bg-[size:40px_40px] rounded-[3rem]" />
+              
+              <div className="relative z-10">
+                <h3 className="text-secondary font-black text-2xl md:text-3xl tracking-tighter mb-10">Get in touch</h3>
 
-              {/* Message/Query Textbox */}
-              <div className="relative group">
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="How can we help you?"
-                  rows={3}
-                  className="w-full border-0 border-b border-secondary/20 bg-transparent text-secondary placeholder:text-secondary/40 focus:outline-none focus:border-primary py-2 transition-colors resize-none"
-                  required
-                />
-                <div className="absolute bottom-2 left-0 w-0 h-0.5 bg-primary transition-all group-focus-within:w-full" />
-              </div>
+                <form className="space-y-10" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                    <div className="relative group">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 block">First Name</label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        className="w-full border-0 border-b border-secondary/10 bg-transparent text-secondary placeholder:text-secondary/20 focus:outline-none focus:border-primary py-2 transition-all"
+                        placeholder="John"
+                        required
+                      />
+                    </div>
+                    <div className="relative group">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 block">Last Name</label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className="w-full border-0 border-b border-secondary/10 bg-transparent text-secondary placeholder:text-secondary/20 focus:outline-none focus:border-primary py-2 transition-all"
+                        placeholder="Doe"
+                        required
+                      />
+                    </div>
+                  </div>
 
-              {/* Button */}
-              <div className="flex justify-end pt-4">
-                <button
-                  type="submit"
-                  className="bg-primary text-white px-10 py-4 rounded-full font-bold flex items-center gap-3 shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all active:scale-95"
-                >
-                  Send Message
-                  <span className="text-xl leading-none">→</span>
-                </button>
+                  <div className="relative group">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 block">Enterprise Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full border-0 border-b border-secondary/10 bg-transparent text-secondary placeholder:text-secondary/20 focus:outline-none focus:border-primary py-2 transition-all"
+                      placeholder="john@company.com"
+                      required
+                    />
+                  </div>
+
+                  <div className="relative group">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 block">Message / Inquiry</label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows={3}
+                      className="w-full border-0 border-b border-secondary/10 bg-transparent text-secondary placeholder:text-secondary/20 focus:outline-none focus:border-primary py-2 transition-all resize-none"
+                      placeholder="How can we assist your sustainability goals?"
+                      required
+                    />
+                  </div>
+
+                  <div className="pt-6">
+                    <button
+                      type="submit"
+                      className="group w-full sm:w-auto flex items-center justify-center gap-4 bg-primary text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-widest shadow-2xl shadow-primary/20 hover:bg-secondary transition-all active:scale-95"
+                    >
+                      Send Message
+                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

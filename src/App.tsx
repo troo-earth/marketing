@@ -8,16 +8,16 @@ import Footer from "./components/ui/footer";
 
 /* ---------- Pages ---------- */
 import LandingPage from "./components/pages/LandingPage";
-import PlatformActionsSection from "./components/pages/PlatformActions";
-import MeetTheTeam from "./components/pages/MeetTeam";
+
 import Contact from "./components/pages/Contact";
 import PricingPage from "./components/pages/Pricing";
 import PaymentSuccessPage from "./components/pages/PaymentSuccess";
 import Solutions from "./components/pages/Solutions";
 import Company from "./components/pages/Company";
 import Marketplace from "./components/pages/Marketplace";
-import WhatWeDo from "./components/pages/WhatWeDo";
-import MarketOpportunity from "./components/pages/MarketOpportunity"
+
+import UnifiedCapabilities from "./components/pages/UnifiedCapabilities";
+import TeamAndOpportunity from "./components/pages/TeamAndOpportunity";
 
 
 /* ---------- Layouts ---------- */
@@ -36,14 +36,10 @@ const AuthLayout = () => <Outlet />;
 
 const HomePage = () => (
   <>
-    <main className=" pt-40 relative overflow-hidden">
-      <LandingPage />
-    </main>
     
-    <PlatformActionsSection />
-    <WhatWeDo />
-    <MarketOpportunity />
-    <MeetTheTeam />
+    <LandingPage />    
+    <UnifiedCapabilities />
+    <TeamAndOpportunity />
     <Contact />
   </>
 );

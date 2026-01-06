@@ -1,49 +1,48 @@
 // src/components/Navbar.tsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import logo from '../../assets/mainLogo.svg';
 import { ArrowUpRight } from 'lucide-react';
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  
   const NAV_ITEMS = [
-  { label: "What We Do", id: "what-we-do" },
-  { label: "Opportunity", id: "market-dynamics" },
-  { label: "Meet the Team", id: "meet-the-team" },
-  { label: "Contact Us", id: "contact-us" },
-];
+    { label: "What We Do", id: "what-we-do" },
+    { label: "Opportunity", id: "market-dynamics" },
+    { label: "Meet the Team", id: "meet-the-team" },
+    { label: "Contact Us", id: "contact-us" },
+  ];
 
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent ${
-          scrolled ? 'backdrop-blur-lg bg-white/95 shadow-sm' : ''
-        }`}
-      >
-        <div className="px-10">
-          <div className="flex items-center justify-between h-20">
+      {/* Outer wrapper provides the 'Floating' placement */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none">
+        <div
+          className={`
+            w-full max-w-[1600px] pointer-events-auto transition-all duration-500 ease-in-out
+            rounded-[2rem] border border-white/20 
+            backdrop-blur-xl bg-white shadow-[0_20px_40px_-15px_rgba(23,62,53,0.15)] py-2 
+            
+            }
+          `}
+        >
+          <div className="px-6 md:px-10 lg:px-12 flex items-center justify-between h-14 md:h-16">
+            
             {/* Logo */}
-            <a href="/" className="flex items-center space-x-3">
-              <img src={logo} alt="Logo" className="h-10 w-auto" />
+            <a href="/" className="flex items-center shrink-0">
+              <img src={logo} alt="troo.earth" className="h-7 md:h-9 w-auto transition-transform hover:scale-105" />
             </a>
 
             {/* Desktop Center Links */}
-            <nav className="hidden lg:flex items-center justify-center flex-1">
+            <nav className="hidden lg:flex items-center justify-center flex-1 px-10">
               <div className="flex space-x-10">
                 {NAV_ITEMS.map((item) => (
                   <a
                     key={item.id}
                     href={`#${item.id}`}
-                    className="font-medium transition-colors text-secondary hover:text-primary"
+                    className="text-[14px] font-black uppercase tracking-[0.1em] transition-colors text-secondary/80 hover:text-primary whitespace-nowrap"
                   >
                     {item.label}
                   </a>
@@ -51,70 +50,62 @@ const Navbar = () => {
               </div>
             </nav>
 
-            {/* Right Button: Marketplace Replacement */}
-            <div className="hidden md:flex items-center">
-  <a
-    href="/marketplace"
-    className="flex items-center gap-2 px-7 py-2.5 rounded-3xl font-bold transition-all bg-primary-gradient text-white shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:scale-95 group"
-  >
-    <span>Marketplace</span>
-    {/* ArrowUpRight is more "forward-moving" and fits a tech brand better */}
-    <ArrowUpRight 
-      size={18} 
-      className=" transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" 
-    />
-  </a>
-</div>
+            {/* Right Button */}
+            <div className="hidden md:flex items-center shrink-0">
+              <a
+                href="/marketplace"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-full font-black text-[11px] uppercase tracking-widest transition-all bg-primary-gradient text-white shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:scale-95 group"
+              >
+                <span>Marketplace</span>
+                <ArrowUpRight 
+                  size={16} 
+                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-accent" 
+                />
+              </a>
+            </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`lg:hidden p-2 rounded-lg ${
-                scrolled ? 'text-gray-700' : 'text-secondary'
-              }`}
+              className="lg:hidden p-2 text-secondary"
+              aria-label="Toggle Menu"
             >
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d={mobileOpen ? "M6 18L18 6" : "M4 6h16M4 12h16M4 18h16"}
-                />
-              </svg>
+              <div className="w-7 flex flex-col items-end gap-1.5">
+                <span className={`h-0.5 bg-current transition-all ${mobileOpen ? 'w-7 rotate-45 translate-y-2' : 'w-7'}`} />
+                <span className={`h-0.5 bg-current transition-all ${mobileOpen ? 'opacity-0' : 'w-5'}`} />
+                <span className={`h-0.5 bg-current transition-all ${mobileOpen ? 'w-7 -rotate-45 -translate-y-2' : 'w-7'}`} />
+              </div>
             </button>
           </div>
-        </div>
 
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className={`lg:hidden absolute top-full left-0 right-0 ${scrolled ? 'bg-white' : 'bg-white/95 backdrop-blur-lg'} shadow-xl border-t`}>
-            <div className="px-6 py-6 space-y-4">
+          {/* Mobile Menu - Contained within the rounded island */}
+          <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
+            mobileOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          }`}>
+            <div className="px-10 py-8 space-y-6 text-center border-t border-secondary/5">
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="block text-lg font-medium text-secondary hover:text-primary"
+                  className="block text-xl font-black text-secondary hover:text-primary tracking-tighter"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
                 </a>
               ))}
-              <div className="pt-4 border-t">
+              <div className="pt-6">
                 <a
                   href="/marketplace"
-                  className="flex items-center justify-center gap-2 w-full bg-primary text-white py-3 rounded-xl font-bold hover:shadow-lg"
+                  className="flex items-center justify-center gap-2 w-full bg-primary text-white py-4 rounded-2xl font-black uppercase tracking-widest text-sm"
                   onClick={() => setMobileOpen(false)}
                 >
                   Marketplace
-                  <ArrowUpRight 
-      size={18} 
-      className=" transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" 
-    />
+                  <ArrowUpRight size={18} />
                 </a>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </header>
     </>
   );
