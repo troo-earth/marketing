@@ -1,90 +1,56 @@
 // src/App.tsx
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 
 /* ---------- UI Shell ---------- */
 import Navbar from "./components/ui/Navbar";
 import Footer from "./components/ui/footer";
 
-/* ---------- Pages ---------- */
+/* ---------- Sections ---------- */
 import LandingPage from "./components/pages/LandingPage";
-
-import Contact from "./components/pages/Contact";
-import PricingPage from "./components/pages/Pricing";
-import PaymentSuccessPage from "./components/pages/PaymentSuccess";
-import Solutions from "./components/pages/Solutions";
-import Company from "./components/pages/Company";
-import Marketplace from "./components/pages/Marketplace";
-
 import UnifiedCapabilities from "./components/pages/UnifiedCapabilities";
 import TeamAndOpportunity from "./components/pages/TeamAndOpportunity";
+import Contact from "./components/pages/Contact";
 
-
-/* ---------- Layouts ---------- */
-
-const MarketingLayout = () => (
-  <>
-    <Navbar />
-    <Outlet />
-    <Footer />
-  </>
-);
-
-const AuthLayout = () => <Outlet />;
-
-/* ---------- Composite Pages ---------- */
-
-const HomePage = () => (
-  <>
-    
-    <LandingPage />    
-    <UnifiedCapabilities />
-    <TeamAndOpportunity />
-    <Contact />
-  </>
-);
-
-/* ---------- App Root ---------- */
+import VisionMission from "./components/pages/Vision&Mission";
+/**
+ * Troo.earth Marketing Root
+ * A high-integrity, single-page enterprise experience.
+ */
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Marketplace from "./components/pages/Marketplace";
+import ScrollToTop from "./components/utils/ScrollToTop";
+import TermsAndConditions from "./components/pages/TermsAndCondition";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import FAQ from "./components/pages/FAQ";
 
 function App() {
   return (
-    <>
-      {/* Global Toast System */}
-      <Toaster
-        position="top-right"
-        gutter={12}
-        toastOptions={{
-          duration: 3000,
-          style: {
-            borderRadius: "14px",
-            fontWeight: 600,
-            background: "#ffffff",
-            color: "#0f172a",
-            boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
-          },
-        }}
-      />
-
-      {/* Router */}
-      <BrowserRouter>
-        <Routes>
-          {/* Marketing pages (with navbar & footer) */}
-          <Route element={<MarketingLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/payment-success" element={<PaymentSuccessPage />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/company" element={<Company />} />
-            <Route path="/contacts" element={<Contact />} />
-          </Route>
-
-          {/* Auth pages (no navbar/footer) */}
-          <Route element={<AuthLayout />}>
+    <BrowserRouter>
+      <ScrollToTop />
+      <div className="flex flex-col min-h-screen bg-[var(--background-image-main-gradient)]">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            {/* Main Landing Flow */}
+            <Route path="/" element={
+              <>
+                <LandingPage />
+                <UnifiedCapabilities />
+                <TeamAndOpportunity />
+                <Contact />
+              </>
+            } />
+            {/* Standalone Vision Page */}
+            <Route path="/vision-mission" element={<VisionMission />} />
+            {/* Marketplace Coming Soon Page */}
             <Route path="/marketplace" element={<Marketplace />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/faq" element={<FAQ />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
