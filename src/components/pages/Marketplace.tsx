@@ -1,70 +1,82 @@
-import React from 'react';
-import {  Timer, ArrowLeft, Sparkles, Globe } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Globe, ShieldCheck, Database } from 'lucide-react';
 
-const Marketplace: React.FC = () => {
+const MarketplaceComingSoon = () => {
   return (
-    <main className="relative min-h-screen bg-[var(--background-image-main-gradient)] flex items-center justify-center pt-2 px-6 overflow-hidden">
+    <div className="min-h-screen bg-white font-nunito relative overflow-hidden flex items-center justify-center pt-32">
+      {/* Blueprint Grid Background (Watershed Style) */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+        style={{ 
+          backgroundImage: `linear-gradient(#173E35 1px, transparent 1px), linear-gradient(90deg, #173E35 1px, transparent 1px)`,
+          backgroundSize: '40px 40px' 
+        }} 
+      />
       
-      {/* Branded Atmospheric Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-accent/10 blur-[120px] rounded-full" />
-        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-      </div>
+      {/* Branded Atmosphere */}
+      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[140px]" />
 
-      <div className="relative z-10 max-w-4xl w-full text-center">
-        {/* Animated Icon Header */}
-        
+      <div className="relative z-10 w-full max-w-4xl px-6 text-center">
+        {/* Status Badge */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-secondary/5 border border-secondary/10 mb-8"
+        >
+          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">
+            Registry Synchronization in Progress
+          </span>
+        </motion.div>
 
-        {/* Text Content */}
-        <div className="space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 border border-primary/10 backdrop-blur-sm shadow-sm">
-            <Sparkles className="text-primary" size={14} />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">The Future of Exchange</span>
-          </div>
+        {/* Main Heading - Sourced from TE-CP */}
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-secondary font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.9] mb-8"
+        >
+          The Future of <br />
+          <span className="text-primary-gradient italic tracking-normal">Climate Integrity.</span>
+        </motion.h1>
 
-          <h1 className="text-6xl md:text-8xl font-black text-secondary leading-[0.9] tracking-tighter">
-            Marketplace <br />
-            <span className="text-primary-gradient">Coming Soon.</span>
-          </h1>
-
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium">
-            We are building a decentralized hub for verified carbon credits, sustainable assets, and impact-first procurement. 
-            Moving the planet forward, one transaction at a time.
-          </p>
-        </div>
+        {/* Subtext - Sourced from TE-CP */}
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12"
+        >
+          We are building a straightforward solution to a complex market. 
+          Our enterprise-grade marketplace is evolving to provide the governance 
+          and security expected by multinational organizations.
+        </motion.p>
 
         {/* Feature Teasers */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 text-left"
+        >
           {[
-            { label: 'Verified Credits', icon: <Globe size={16}/> },
-            { label: 'Impact Tracking', icon: <Sparkles size={16}/> },
-            { label: 'Instant Settlement', icon: <Timer size={16}/> },
-          ].map((item) => (
-            <div key={item.label} className="bg-white/40 backdrop-blur-md border border-white/60 p-4 rounded-2xl flex items-center justify-center gap-3">
-              <span className="text-primary">{item.icon}</span>
-              <span className="text-xs font-black text-secondary uppercase tracking-widest">{item.label}</span>
+            { icon: <Database size={18}/>, label: "Direct Data Bridges", desc: "Registry-connected systems." },
+            { icon: <ShieldCheck size={18}/>, label: "Verified Impact", desc: "No ambiguity, only results." },
+            { icon: <Globe size={18}/>, label: "Global Scale", desc: "Multisector project access." }
+          ].map((item, i) => (
+            <div key={i} className="p-6 rounded-3xl bg-white border border-secondary/5 shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-primary mb-3">{item.icon}</div>
+              <h3 className="text-secondary font-black text-xs uppercase tracking-widest mb-2">{item.label}</h3>
+              <p className="text-gray-400 text-xs font-medium leading-normal">{item.desc}</p>
             </div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Navigation Back */}
-        <div className="mt-12 flex flex-col items-center gap-6">
-          <Link 
-            to="/" 
-            className="group flex items-center gap-2 text-secondary font-black hover:text-primary transition-colors uppercase tracking-widest text-xs"
-          >
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            Back to troo.earth Home
-          </Link>
-          
-          <div className="h-px w-24 bg-secondary opacity-20" />
-          <p className="text-[10px] font-bold text-secondary/40 uppercase tracking-[0.4em]">troo.earth Impact Engine v2.0</p>
-        </div>
+        
       </div>
-    </main>
+    </div>
   );
 };
 
-export default Marketplace;
+export default MarketplaceComingSoon;

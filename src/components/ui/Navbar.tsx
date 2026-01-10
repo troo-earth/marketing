@@ -1,10 +1,15 @@
 // src/components/Navbar.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/mainLogo.svg';
 import { ArrowUpRight } from 'lucide-react';
+import { HashLink } from 'react-router-hash-link';
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   
   const NAV_ITEMS = [
     { label: "What We Do", id: "what-we-do" },
@@ -13,7 +18,40 @@ const Navbar = () => {
     { label: "Contact Us", id: "contact-us" },
   ];
 
-  
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavClick = (id: string) => {
+    setMobileOpen(false);
+    
+    // If not on home page, navigate to home first, then scroll
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      // If already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Otherwise, navigate to home page
+      navigate('/');
+    }
+  };
 
   return (
     <>
@@ -22,16 +60,20 @@ const Navbar = () => {
         <div
           className={`
             w-full max-w-[1600px] pointer-events-auto transition-all duration-500 ease-in-out
-            rounded-[2rem] border border-white/20 
-            backdrop-blur-xl bg-white shadow-[0_20px_40px_-15px_rgba(23,62,53,0.15)] py-2 
-            
+            rounded-[2rem] py-2
+            ${isScrolled 
+              ? 'border border-white/20 backdrop-blur-xl bg-white shadow-[0_20px_40px_-15px_rgba(23,62,53,0.15)]' 
+              : 'border border-transparent bg-transparent shadow-none'
             }
           `}
         >
           <div className="px-6 md:px-10 lg:px-12 flex items-center justify-between h-14 md:h-16">
             
             {/* Logo */}
-            <a href="/" className="flex items-center shrink-0">
+            <a 
+              onClick={handleLogoClick}
+              className="flex items-center shrink-0 cursor-pointer"
+            >
               <img src={logo} alt="troo.earth" className="h-7 md:h-9 w-auto transition-transform hover:scale-105" />
             </a>
 
@@ -39,21 +81,23 @@ const Navbar = () => {
             <nav className="hidden lg:flex items-center justify-center flex-1 px-10">
               <div className="flex space-x-10">
                 {NAV_ITEMS.map((item) => (
-                  <a
+                  <HashLink
                     key={item.id}
-                    href={`#${item.id}`}
+                    to={`/#${item.id}`}
+                    smooth
                     className="text-[14px] font-black uppercase tracking-[0.1em] transition-colors text-secondary/80 hover:text-primary whitespace-nowrap"
+                    onClick={() => handleNavClick(item.id)}
                   >
                     {item.label}
-                  </a>
+                  </HashLink>
                 ))}
               </div>
             </nav>
 
             {/* Right Button */}
-            <div className="hidden md:flex items-center shrink-0">
-              <a
-                href="/marketplace"
+            <div className="hidden xl:flex items-center shrink-0">
+              <HashLink
+                to="/marketplace"
                 className="flex items-center gap-2 px-6 py-2.5 rounded-full font-black text-[11px] uppercase tracking-widest transition-all bg-primary-gradient text-white shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:scale-95 group"
               >
                 <span>Marketplace</span>
@@ -61,7 +105,7 @@ const Navbar = () => {
                   size={16} 
                   className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-accent" 
                 />
-              </a>
+              </HashLink>
             </div>
 
             {/* Mobile Menu Button */}
@@ -84,24 +128,25 @@ const Navbar = () => {
           }`}>
             <div className="px-10 py-8 space-y-6 text-center border-t border-secondary/5">
               {NAV_ITEMS.map((item) => (
-                <a
+                <HashLink
                   key={item.id}
-                  href={`#${item.id}`}
+                  to={`/#${item.id}`}
+                  smooth
                   className="block text-xl font-black text-secondary hover:text-primary tracking-tighter"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => handleNavClick(item.id)}
                 >
                   {item.label}
-                </a>
+                </HashLink>
               ))}
               <div className="pt-6">
-                <a
-                  href="/marketplace"
+                <HashLink
+                  to="/marketplace"
                   className="flex items-center justify-center gap-2 w-full bg-primary text-white py-4 rounded-2xl font-black uppercase tracking-widest text-sm"
                   onClick={() => setMobileOpen(false)}
                 >
                   Marketplace
                   <ArrowUpRight size={18} />
-                </a>
+                </HashLink>
               </div>
             </div>
           </div>

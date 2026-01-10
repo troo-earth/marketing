@@ -1,4 +1,166 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight, Globe } from "lucide-react";
+
+// --- UNIQUE CARBON FLOW ANIMATION ---
+const CarbonFlowCanvas = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    // SSR guard
+    if (typeof window === "undefined") return;
+    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Define FlowParticle class BEFORE using it
+    class FlowParticle {
+      x: number;
+      y: number;
+      targetX: number;
+      targetY: number;
+      size: number;
+      opacity: number;
+      speed: number;
+      color: string;
+      trail: { x: number; y: number }[];
+
+      constructor(canvas: HTMLCanvasElement) {
+        // Start from left side
+        this.x = -20;
+        this.y = Math.random() * canvas.height;
+        
+        // Flow to right side with curves
+        this.targetX = canvas.width + 20;
+        this.targetY = canvas.height * 0.5 + (Math.random() - 0.5) * canvas.height * 0.6;
+        
+        this.size = Math.random() * 2 + 1;
+        this.opacity = Math.random() * 0.5 + 0.3;
+        this.speed = Math.random() * 0.5 + 0.3;
+        
+        // Brand colors: primary, secondary, accent
+        const colors = ['#007473', '#173E35', '#FFB71B'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        
+        this.trail = [];
+      }
+
+      update(canvas: HTMLCanvasElement) {
+        // Add current position to trail
+        this.trail.push({ x: this.x, y: this.y });
+        
+        // Hard limit trail length to prevent memory leak
+        if (this.trail.length > 12) {
+          this.trail.shift();
+        }
+
+        // Move towards target with sine wave
+        const progress = this.x / canvas.width;
+        
+        this.x += this.speed;
+        this.y += Math.sin(progress * Math.PI * 3) * 0.5;
+
+        // Reset when off screen
+        if (this.x > canvas.width + 20) {
+          this.x = -20;
+          this.y = Math.random() * canvas.height;
+          this.targetY = canvas.height * 0.5 + (Math.random() - 0.5) * canvas.height * 0.6;
+        }
+      }
+
+      draw(ctx: CanvasRenderingContext2D) {
+        // Draw trail
+        if (this.trail.length > 1) {
+          ctx.beginPath();
+          ctx.moveTo(this.trail[0].x, this.trail[0].y);
+          
+          for (let i = 1; i < this.trail.length; i++) {
+            ctx.lineTo(this.trail[i].x, this.trail[i].y);
+          }
+          
+          const gradient = ctx.createLinearGradient(
+            this.trail[0].x, this.trail[0].y,
+            this.x, this.y
+          );
+          gradient.addColorStop(0, `${this.color}00`);
+          gradient.addColorStop(1, `${this.color}${Math.floor(this.opacity * 255).toString(16).padStart(2, '0')}`);
+          
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size * 0.5;
+          ctx.stroke();
+        }
+
+        // Draw particle with glow
+        const gradient = ctx.createRadialGradient(
+          this.x, this.y, 0,
+          this.x, this.y, this.size * 3
+        );
+        gradient.addColorStop(0, `${this.color}${Math.floor(this.opacity * 255).toString(16).padStart(2, '0')}`);
+        gradient.addColorStop(1, `${this.color}00`);
+        
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Core particle
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // NOW we can use FlowParticle type
+    let particles: FlowParticle[] = [];
+    let animationFrameId: number;
+
+    const resize = () => {
+      // Defensive checks for SSR
+      canvas.width = canvas.offsetWidth || (typeof window !== "undefined" ? window.innerWidth : 800);
+      canvas.height = canvas.offsetHeight || (typeof window !== "undefined" ? window.innerHeight : 600);
+    };
+
+    const init = () => {
+      particles = [];
+      for (let i = 0; i < 50; i++) {
+        particles.push(new FlowParticle(canvas));
+      }
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(particle => {
+        particle.update(canvas);
+        particle.draw(ctx);
+      });
+      
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    // Debounced resize handler to prevent reflow storms
+    let resizeTimeout: number;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resize, 150);
+    };
+
+    window.addEventListener("resize", handleResize);
+    resize();
+    init();
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimeout);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="w-full h-full opacity-40" />;
+};
 
 const LandingPage = () => {
   return (
@@ -14,21 +176,24 @@ const LandingPage = () => {
         <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       </div>
 
+      {/* Animated Carbon Flow Background - Desktop only */}
+      <div className="absolute inset-0 pointer-events-none">
+        <CarbonFlowCanvas />
+      </div>
+
       <div className="relative z-10 w-full max-w-7xl h-screen flex flex-col justify-between px-6 pt-32 pb-24 md:py-16 lg:pb-20 lg:pt-32">
         
         {/* --- HERO CONTENT --- */}
         <section className="flex flex-col items-center justify-center text-center flex-grow">
           
-          
-
           {/* High-Impact Typography */}
-          <h1 className="text-secondary font-black text-[40px] sm:text-[54px] md:text-[68px] lg:text-[80px] xl:text-[95px] leading-[0.9] tracking-tighter mb-8 max-w-5xl">
+          <h1 className="text-secondary font-black text-[60px] md:text-[80px] lg:text-[80px] xl:text-[95px] leading-[0.9] tracking-tighter mb-8 max-w-5xl">
             Turning Commitments <br />
             <span className="text-primary-gradient italic">into Action.</span>
           </h1>
 
           {/* Refined Subtext */}
-          <p className="text-secondary/70 font-medium text-base md:text-xl max-w-2xl leading-relaxed mb-10">
+          <p className="text-secondary/70 font-medium text-base md:text-[24px] xl:text-xl max-w-2xl leading-relaxed mb-10">
             Troo.earth is a digital marketplace purpose-built for corporate climate action. 
             Connect to verified projects through an ecosystem of trust and clarity.
           </p>
@@ -45,17 +210,16 @@ const LandingPage = () => {
             </a>
             
             <div className="flex items-center gap-6">
-                <div className="w-12 h-12 rounded-full border border-secondary/10 flex items-center justify-center bg-white/20">
-                    <Globe className="text-primary animate-spin-slow" size={20} />
-                </div>
-                <div className="text-left">
-                    <p className="text-secondary font-black text-2xl tracking-tighter leading-none">USD 4.73T</p>
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-primary/60 mt-1">Market Scale by 2030</p>
-                </div>
+              <div className="w-12 h-12 rounded-full border border-secondary/10 flex items-center justify-center bg-white/20">
+                <Globe className="text-primary animate-spin-slow" size={20} />
+              </div>
+              <div className="text-left">
+                <p className="text-secondary font-black text-2xl tracking-tighter leading-none">USD 4.73T</p>
+                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-primary/60 mt-1">Market Scale by 2030</p>
+              </div>
             </div>
           </div>
         </section>
-
         
       </div>
 
