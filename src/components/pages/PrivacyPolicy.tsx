@@ -10,7 +10,7 @@ const PrivacyPolicy = () => {
     {
       title: "2. Governance and Security",
       icon: <Lock size={20} />,
-      content: "Troo.earth operates under strict principles of data security and accountability. We utilize advanced encryption and follow global market standards to protect your information and maintain transparency across every transaction."
+      content: "troo.earth operates under strict principles of data security and accountability. We utilize advanced encryption and follow global market standards to protect your information and maintain transparency across every transaction."
     },
     {
       title: "3. Transparency and Disclosure",
@@ -50,7 +50,7 @@ const PrivacyPolicy = () => {
             <span className="text-primary-gradient italic tracking-normal">Data Governance.</span>
           </h1>
           <p className="text-gray-500 font-medium text-lg md:text-xl leading-relaxed">
-            At Troo.earth, trust is central to effective climate action. We manage enterprise data with the rigor expected by multinational organizations.
+            At troo.earth, trust is central to effective climate action. We manage enterprise data with the rigor expected by multinational organizations.
           </p>
         </div>
 

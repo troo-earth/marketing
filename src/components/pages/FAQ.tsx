@@ -3,7 +3,7 @@ import { ChevronDown, Zap } from 'lucide-react';
 const FAQ = () => {
   const faqs = [
     {
-      q: "How does Troo.earth ensure credit authenticity?",
+      q: "How does troo.earth ensure credit authenticity?",
       a: "We connect with recognized registries and market infrastructure providers using direct data bridges. Every action is recorded with full visibility from project origin to retirement to preserve integrity."
     },
     {
@@ -15,7 +15,7 @@ const FAQ = () => {
       a: "Yes. We provide transparent documentation and evidence that stand up to audits, supporting fast onboarding for enterprise compliance."
     },
     {
-      q: "How does Troo.earth protect against greenwashing?",
+      q: "How does troo.earth protect against greenwashing?",
       a: "By providing complete visibility and documenting the journey of every credit from issuance to retirement, we eliminate ambiguity and protect organizations from risk."
     }
   ];

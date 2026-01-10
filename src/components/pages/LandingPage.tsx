@@ -194,7 +194,7 @@ const LandingPage = () => {
 
           {/* Refined Subtext */}
           <p className="text-secondary/70 font-medium text-base md:text-[24px] xl:text-xl max-w-2xl leading-relaxed mb-10">
-            Troo.earth is a digital marketplace purpose-built for corporate climate action. 
+            troo.earth is a digital marketplace purpose-built for corporate climate action. 
             Connect to verified projects through an ecosystem of trust and clarity.
           </p>
 
