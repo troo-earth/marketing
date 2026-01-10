@@ -5,7 +5,7 @@ const TermsAndConditions = () => {
     {
       title: "1. Scope of Service",
       icon: <FileText size={20} />,
-      content: "Troo.earth provides a digital marketplace purpose-built for corporate climate action. We connect organisations to verified credits through secure technology and direct data bridges with global registries and exchanges."
+      content: "troo.earth provides a digital marketplace purpose-built for corporate climate action. We connect organisations to verified credits through secure technology and direct data bridges with global registries and exchanges."
     },
     {
       title: "2. Verification & Integrity",
@@ -20,7 +20,7 @@ const TermsAndConditions = () => {
     {
       title: "4. Governance",
       icon: <Lock size={20} />,
-      content: "Troo.earth operates under strict principles of data security and accountability. We use advanced encryption and follow global market standards to maintain transparency and protect information across every transaction."
+      content: "troo.earth operates under strict principles of data security and accountability. We use advanced encryption and follow global market standards to maintain transparency and protect information across every transaction."
     }
   ];
 
