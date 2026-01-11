@@ -30,7 +30,7 @@ const Contact = () => {
         <div className="bg-white rounded-2xl shadow-2xl border border-primary/20 px-6 py-4 flex items-center gap-3 backdrop-blur-xl">
           <CheckCircle2 className="text-primary" size={20} />
           <div>
-            <p className="font-black text-secondary text-sm">Transmission Received</p>
+            <p className="font-black text-secondary text-sm">Message Received</p>
             <p className="text-gray-500 text-xs font-medium">Our team will respond shortly.</p>
           </div>
         </div>
