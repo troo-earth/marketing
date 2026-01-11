@@ -7,6 +7,8 @@ import {
   Fingerprint,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import Cliff from "../../../public/assets/cliff.webp";
+import Basil from "../../../public/assets/Basil.webp";
 
 const TeamAndOpportunity = () => {
   const userBenefits = [
@@ -147,8 +149,14 @@ const TeamAndOpportunity = () => {
                   name: "Cliff Chuah",
                   role: "Chairman",
                   status: "Strategic Oversight",
+                  image: Cliff,
                 },
-                { name: "Basil Rari", role: "CEO", status: "Operational Lead" },
+                { 
+                  name: "Basil Rari", 
+                  role: "CEO", 
+                  status: "Operational Lead",
+                  image: Basil,
+                },
               ].map((member, idx) => (
                 <div
                   key={idx}
@@ -158,7 +166,7 @@ const TeamAndOpportunity = () => {
                     <div className="relative shrink-0">
                       <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-white overflow-hidden shadow-lg">
                         <img
-                          src="https://via.placeholder.com/150"
+                          src={member.image}
                           alt={member.name}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />

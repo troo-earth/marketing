@@ -46,9 +46,9 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-4">
               {[
-                { icon: <Linkedin size={18} />, href: "#" },
-                { icon: <Instagram size={18} />, href: "#" },
-                { icon: <Twitter size={18} />, href: "#" }
+                { icon: <Linkedin size={18} />, href: "https://www.linkedin.com/in/troo-earth" },
+                { icon: <Instagram size={18} />, href: "https://www.instagram.com/troo.earth" },
+                { icon: <Twitter size={18} />, href: "https://x.com/trooearth" }
               ].map((social, i) => (
                 <a key={i} href={social.href} className="w-9 h-9 rounded-xl bg-secondary/5 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all">
                   {social.icon}
