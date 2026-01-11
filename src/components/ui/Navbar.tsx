@@ -65,6 +65,7 @@ const Navbar = () => {
               ? 'border border-white/20 backdrop-blur-xl bg-white shadow-[0_20px_40px_-15px_rgba(23,62,53,0.15)]' 
               : 'border border-transparent bg-transparent shadow-none'
             }
+            ${mobileOpen ? 'bg-white/95 backdrop-blur-xl border-white/20 shadow-[0_20px_40px_-15px_rgba(23,62,53,0.15)]' : ''}
           `}
         >
           <div className="px-6 md:px-10 lg:px-12 flex items-center justify-between h-14 md:h-16">
