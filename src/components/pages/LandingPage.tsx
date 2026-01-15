@@ -166,7 +166,7 @@ const LandingPage = () => {
         <section className="flex flex-col items-center justify-center text-center flex-grow">
           
           {/* High-Impact Typography */}
-          <h1 className="text-secondary font-black text-[60px] md:text-[80px] lg:text-[80px] xl:text-[95px] leading-[0.9] tracking-tighter mb-8 max-w-5xl">
+          <h1 className="text-secondary font-black text-[50px] sm:text-[60px] md:text-[80px] lg:text-[80px] xl:text-[95px] leading-[0.9] tracking-tighter mb-8 max-w-5xl">
             Turning Commitments <br />
             <span className="text-primary-gradient italic">into Action.</span>
           </h1>
