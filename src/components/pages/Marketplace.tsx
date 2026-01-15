@@ -25,7 +25,7 @@ const MarketplaceComingSoon = () => {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-secondary/5 border border-secondary/10 mb-8"
         >
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">
+          <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-secondary">
             Registry Synchronization in Progress
           </span>
         </motion.div>
@@ -35,7 +35,7 @@ const MarketplaceComingSoon = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-secondary font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.9] mb-8"
+          className="text-secondary font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.9] mb-8"
         >
           The Future of <br />
           <span className="text-primary-gradient italic tracking-normal">Climate Integrity.</span>
