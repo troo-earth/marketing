@@ -60,7 +60,7 @@ const PrivacyPolicy = () => {
             <span className="text-primary-gradient italic tracking-normal">Data Governance.</span>
           </h1>
           <p className="text-gray-500 font-medium text-lg md:text-xl leading-relaxed">
-            At Troo.earth, trust is central to effective climate action. We manage enterprise data with the rigor and transparency expected by global organizations.
+            At troo.earth, trust is central to effective climate action. We manage enterprise data with the rigor and transparency expected by global organizations.
           </p>
           <p className="mt-4 text-gray-400 font-bold text-sm uppercase tracking-widest">
             Effective Date: January 16, 2026
