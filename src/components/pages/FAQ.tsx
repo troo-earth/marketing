@@ -1,92 +1,110 @@
 import { ChevronDown, Zap } from 'lucide-react';
 
 const FAQ = () => {
-  const faqs = [
+  const categories = [
     {
-      q: "How does troo.earth ensure credit authenticity?",
-      a: "We connect with recognized registries and market infrastructure providers using direct data bridges. Every action is recorded with full visibility from project origin to retirement to preserve integrity."
+      header: "Getting Started",
+      items: [
+        { q: "Who can use troo.earth?", a: "Our platform is designed for enterprises and organizations seeking to purchase, transfer, or retire verified carbon credits for corporate climate commitments." },
+        { q: "How do I create an account?", a: "Contact our partnerships team to set up an enterprise account with customized access levels for your sustainability team." },
+        { q: "What registries do you integrate with?", a: "We maintain direct data bridges with Verra, Gold Standard, Climate Action Reserve, and other leading global carbon registries." }
+      ]
     },
     {
-      q: "What types of projects are available?",
-      a: "Our portfolio includes reforestation, renewable energy, soil carbon, and community-based initiatives, all verified by globally recognized bodies."
+      header: "Platform & Transactions",
+      items: [
+        { q: "How long does credit transfer take?", a: "Transfers are processed in real-time through our registry integrations, with full documentation available immediately." },
+        { q: "Can I track my retired credits?", a: "Yes. Every retirement generates a permanent, auditable record with registry confirmation and retirement certificates." },
+        { q: "What payment methods do you accept?", a: "We support enterprise invoicing, wire transfers, and ACH payments for verified business accounts." }
+      ]
     },
     {
-      q: "Is the platform audit-ready?",
-      a: "Yes. We provide transparent documentation and evidence that stand up to audits, supporting fast onboarding for enterprise compliance."
+      header: "Pricing & Billing",
+      items: [
+        { q: "What are your fees?", a: "Our transparent fee structure includes a small transaction fee and platform access subscription. Contact us for enterprise pricing." },
+        { q: "Are there minimum purchase requirements?", a: "Minimum order quantities vary by project type. We recommend starting consultations at 100 tonnes CO2e." }
+      ]
     },
     {
-      q: "How does troo.earth protect against greenwashing?",
-      a: "By providing complete visibility and documenting the journey of every credit from issuance to retirement, we eliminate ambiguity and protect organizations from risk."
+      header: "Carbon Credits & Integrity",
+      items: [
+        { q: "Which standards do you follow?", a: "We integrate with Verra, Gold Standard, and other global registries to ensure all credits are authenticated." },
+        { q: "How is greenwashing prevented?", a: "Through full visibility from origin to retirement, eliminating double-counting risks." }
+      ]
+    },
+    {
+      header: "Security & Compliance",
+      items: [
+        { q: "Is the platform audit-ready?", a: "Yes. Every transaction generates an immutable audit trail for internal and external ESG reporting." }
+      ]
     }
   ];
 
   return (
-    /* Standardized padding and background to match the ecosystem style */
-    <div className="relative min-h-screen w-full bg-[var(--background-image-main-gradient)] font-nunito overflow-hidden pt-40 pb-20 px-6 md:px-12 lg:px-20 xl:px-24">
+    <div className="relative min-h-screen w-full bg-[var(--background-image-main-gradient)] font-nunito pt-40 pb-20 px-6 md:px-12 lg:px-20 xl:px-24">
       
-      {/* --- SHARED BACKGROUND CANVAS --- */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[5%] left-[-5%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[140px]" />
-        <div className="absolute top-[45%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[160px]" />
-        <div className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] bg-primary/15 rounded-full blur-[140px]" />
-        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-      </div>
-
-      {/* Blueprint Grid Overlay */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[size:40px_40px]" 
-           style={{ backgroundImage: 'linear-gradient(#173E35 1px, transparent 1px), linear-gradient(90deg, #173E35 1px, transparent 1px)' }} />
+     
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto flex flex-col items-center">
         
         {/* --- CENTRAL HEADING --- */}
-        <div className="text-center mb-20 max-w-3xl">
+        <div className="text-center mb-16 max-w-3xl">
           
-          <h1 className="text-secondary font-black text-[38px] md:text-[50px] xl:text-[72px] leading-[1.05] tracking-tighter mb-6">
+          <h1 className="text-secondary font-black text-[42px] md:text-[60px] lg:text-[72px] leading-[1.05] tracking-tighter mb-6">
             Market <br />
             <span className="text-primary-gradient italic tracking-normal">Clarity.</span>
           </h1>
           <p className="text-gray-500 font-medium text-lg md:text-xl leading-relaxed">
-            Common questions about our corporate-ready platform. 
-            Restoring confidence in climate action through verified data and straightforward answers.
+            Restoring confidence in corporate climate action through verified data and straightforward answers.
           </p>
         </div>
 
-        {/* FAQ Accordion - Balanced Center Layout */}
-        <div className="max-w-4xl w-full space-y-4">
-          {faqs.map((faq, i) => (
-            <details 
-              key={i} 
-              className="group border border-white/60 rounded-[2rem] bg-white/40 backdrop-blur-xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-primary/5"
-            >
-              <summary className="flex items-center justify-between p-8 cursor-pointer list-none">
-                <span className="text-secondary font-black text-xl tracking-tight pr-4">
-                  {faq.q}
-                </span>
-                <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary transition-all duration-300 group-open:bg-primary group-open:text-white">
-                  <ChevronDown className="transition-transform duration-300 group-open:rotate-180" size={20} />
-                </div>
-              </summary>
-              <div className="px-8 pb-8 text-gray-500 font-medium text-lg leading-relaxed">
-                <div className="w-full h-px bg-secondary/5 mb-6" />
-                {faq.a}
+        {/* --- FAQ CATEGORIES --- */}
+        <div className="max-w-4xl w-full">
+          {categories.map((cat, i) => (
+            <div key={i} className="mb-12">
+              <h2 className="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-8 flex items-center gap-4">
+                <div className="w-8 h-px bg-primary/20" />
+                {cat.header}
+              </h2>
+              <div className="space-y-4">
+                {cat.items.map((item, idx) => (
+                  <details 
+                    key={idx} 
+                    className="group border border-white/60 rounded-[2rem] bg-white/40 backdrop-blur-xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-primary/5"
+                  >
+                    <summary className="p-8 cursor-pointer list-none flex justify-between items-center group-open:pb-4 transition-all">
+                      <span className="text-secondary font-black text-xl tracking-tight pr-6">
+                        {item.q}
+                      </span>
+                      <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-open:bg-primary group-open:text-white transition-all">
+                        <ChevronDown className="group-open:rotate-180 transition-transform" size={20} />
+                      </div>
+                    </summary>
+                    <div className="px-8 pb-8 text-gray-500 font-medium text-lg leading-relaxed">
+                      <div className="w-full h-px bg-secondary/5 mb-6" />
+                      {item.a}
+                    </div>
+                  </details>
+                ))}
               </div>
-            </details>
+            </div>
           ))}
         </div>
 
-        {/* Support CTA - Centralized */}
-        <div className="w-full max-w-4xl mt-20 p-10 rounded-[3rem] bg-primary text-white relative overflow-hidden text-center">
+        {/* --- SUPPORT CTA --- */}
+        <div className="w-full max-w-4xl mt-12 p-10 rounded-[3rem] bg-primary text-white relative overflow-hidden text-center">
           <div className="relative z-10">
-            <h3 className=" font-black text-xs uppercase tracking-[0.4em] mb-4">Support Access</h3>
-            <p className="text-2xl md:text-3xl font-black tracking-tighter mb-4">Still have questions?</p>
-            <p className="text-white/70 mb-8 max-w-lg mx-auto">
-              Our team is dedicated to providing the clarity sustainability teams need to make confident decisions.
+            <h3 className=" font-black text-xs uppercase tracking-[0.4em] mb-4">Direct Connect</h3>
+            <p className="text-2xl md:text-3xl font-black tracking-tighter mb-4">Was your question not addressed?</p>
+            <p className="text-white/70 mb-8 max-w-lg mx-auto font-medium">
+              Our infrastructure specialists are committed to providing the clarity needed for multinational climate action.
             </p>
             <a 
-              href="mailto:partnerships@troo.earth" 
-              className="group inline-flex items-center gap-4 text-white px-10 py-4 rounded-full font-black text-xs uppercase tracking-widest shadow-xl shadow-primary/20 hover:bg-white hover:text-secondary transition-all active:scale-95"
+              href="mailto:support@troo.earth" 
+              className="group inline-flex items-center gap-4 bg-primary text-white px-10 py-4 rounded-full font-black text-xs uppercase tracking-widest shadow-xl shadow-primary/20 hover:bg-white hover:text-secondary transition-all active:scale-95"
             >
-              Contact Partnerships 
+              Contact Support
               <Zap size={16} className="text-accent group-hover:scale-110 transition-transform" />
             </a>
           </div>
