@@ -136,13 +136,13 @@ const Footer = () => {
                 to="/privacy-policy"
                 className="text-gray-400 font-bold text-sm hover:text-primary transition-colors"
               >
-                Data Privacy
+                Privacy Policy
               </Link>
               <Link
                 to="/terms-and-conditions"
                 className="text-gray-400 font-bold text-sm hover:text-primary transition-colors"
               >
-                Governance
+                Terms & Conditions
               </Link>
             </div>
           </div>
