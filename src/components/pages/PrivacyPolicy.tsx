@@ -71,7 +71,7 @@ const PrivacyPolicy = () => {
             At troo.earth, trust is central to effective climate action. We manage enterprise data with the rigor and transparency expected by global organizations.
           </p>
           <p className="mt-4 text-gray-400 font-bold text-sm uppercase tracking-widest">
-            Effective Date: January 16, 2026
+            Last Updated: January 16, 2026
           </p>
         </div>
 
@@ -82,7 +82,7 @@ const PrivacyPolicy = () => {
             return (
               <div key={i} className="group p-10 rounded-[2.5rem] bg-white/40 backdrop-blur-xl border border-white/60 shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-primary/5">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                  <div className=" min-w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                     <Icon size={20} />
                   </div>
                   <h3 className="text-secondary font-black text-xl tracking-tight">{sec.title}</h3>
