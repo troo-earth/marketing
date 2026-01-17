@@ -2,7 +2,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { ArrowUpRight, Linkedin, Instagram, ArrowRight } from "lucide-react";
 import logo from "../../assets/mainLogo.svg";
-import FooterWaterMark from "/assets/footerwatermark.svg";
 
 const Footer = () => {
   const location = useLocation();
@@ -150,11 +149,6 @@ const Footer = () => {
           {/* ✅ COLUMN 4: GLOBAL ACCESS */}
           <div className="lg:col-span-4">
             <div className="p-6 rounded-[2rem] bg-primary text-white relative overflow-hidden group shadow-lg shadow-primary/10">
-              <img
-                src={FooterWaterMark}
-                className="absolute -right-2 -bottom-2 w-24 opacity-20 group-hover:scale-110 transition-transform duration-700 pointer-events-none"
-                alt="Watermark"
-              />
               <h4 className="font-black text-[9px] uppercase tracking-[0.4em] mb-3 opacity-80">
                 Direct Access
               </h4>
