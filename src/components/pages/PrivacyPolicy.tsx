@@ -6,42 +6,50 @@ const PrivacyPolicy = () => {
     {
       title: "1. Information We Collect",
       icon: Database,
-      content: "We collect Personal Information (name, enterprise email, company affiliation), Usage Data (analytics, cookies), and Technical Data (IP addresses, browser types) to facilitate authenticated transactions."
+      content:
+        "We may collect basic personal details (such as name, email address, and organization), limited usage information, and technical metadata (such as device and browser information) to support account access and platform functionality."
     },
     {
       title: "2. How We Use Your Information",
       icon: Zap,
-      content: "Data is used for service delivery, direct communications regarding credit retirement, platform improvements, and maintaining a verifiable audit trail for ESG reporting."
+      content:
+        "Information is used to operate and improve the platform, communicate with users regarding their accounts, and understand how features are being used as the product evolves."
     },
     {
-      title: "3. International Transfers & Rights",
+      title: "3. Data Access & User Control",
       icon: Globe,
-      content: "In compliance with GDPR and CCPA, users have the right to access, delete, or port their data. We ensure all international transfers follow secure, encrypted protocols."
+      content:
+        "Users may request access to, correction of, or deletion of their personal information. As the product is in an early stage, data handling practices may evolve over time."
     },
     {
       title: "4. Data Security",
       icon: Lock,
-      content: "We utilize advanced encryption and registry-connected secure APIs. Our architecture is designed to prevent unauthorized access and maintain the integrity of your climate portfolio."
+      content:
+        "We take reasonable steps to protect user information and reduce the risk of unauthorized access. Security measures and technical architecture are under active development and may change as the platform matures."
     },
     {
       title: "5. Cookies & Tracking",
-      icon: Database, // Re-using Database or use MousePointer if preferred
-      content: "We use essential cookies for platform functionality and analytics cookies to improve experience. You can manage cookie preferences through your browser settings."
+      icon: Database,
+      content:
+        "Basic cookies or similar technologies may be used to support essential functionality and understand general usage patterns. Users can manage cookies through their browser settings."
     },
     {
       title: "6. Data Retention",
       icon: Clock,
-      content: "Transaction records and audit trails are retained indefinitely for compliance purposes. Personal account data is retained for 7 years after account closure."
+      content:
+        "Information is retained only for as long as necessary to support platform operations or user accounts. Retention practices may be updated as product requirements evolve."
     },
     {
-      title: "7. Third-Party Services",
+      title: "7. External Tools & Integrations",
       icon: Share2,
-      content: "We work with trusted partners including payment processors, registry APIs (Verra, Gold Standard), and cloud infrastructure (AWS/GCP), all contractually bound to security."
+      content:
+        "The platform may rely on external tools or infrastructure to function effectively. Specific integrations are not finalized and may change as the product develops."
     },
     {
-      title: "8. Your Rights & Contact",
+      title: "8. Contact",
       icon: Shield,
-      content: "To exercise your data rights (access, deletion, portability) or for privacy questions, contact privacy@troo.earth. We respond to all requests within 30 days."
+      content:
+        "For questions, concerns, or requests related to privacy, contact support@troo.earth. As an early-stage product, response timelines and processes may evolve."
     }
   ];
 
@@ -99,7 +107,7 @@ const PrivacyPolicy = () => {
             </div>
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 flex flex-col items-center md:items-start text-center md:text-left">
               <p className="text-xs font-black uppercase tracking-widest  mb-4">Privacy Office</p>
-              <p className="text-white font-medium mb-6">For inquiries regarding your data rights or GDPR/CCPA compliance:</p>
+              <p className="text-white font-medium mb-6">For inquiries regarding your data rights:</p>
               <a href="mailto:support@troo.earth" className=" font-bold text-md underline decoration-2 underline-offset-8 transition-all hover:text-accent">
                 support@troo.earth
               </a>
