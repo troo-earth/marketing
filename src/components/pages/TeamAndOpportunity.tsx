@@ -7,8 +7,8 @@ import {
   Fingerprint,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import Cliff from "../../../public/assets/cliff.webp";
-import Basil from "../../../public/assets/Basil.webp";
+import Cliff from "../../assets/cliff.webp";
+import Basil from "../../assets/Basil.webp";
 
 const TeamAndOpportunity = () => {
   const userBenefits = [
