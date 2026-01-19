@@ -3,19 +3,44 @@ import { CheckCircle2, Mail, Globe, ArrowRight } from "lucide-react";
 
 const Contact = () => {
   const [showToast, setShowToast] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     company: "",
-    message: ""
+    message: "",
+    _gotcha: "" // Honeypot field for bot protection
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowToast(true);
-    setFormData({ firstName: "", lastName: "", email: "", company: "", message: "" });
-    setTimeout(() => setShowToast(false), 3000);
+    setIsSubmitting(true);
+    const formId = import.meta.env.VITE_FORMSPREE_ID;
+    try {
+      // REPLACE 'YOUR_FORM_ID' with the ID provided by Formspree
+      const response = await fetch(`https://formspree.io/f/${formId}`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setShowToast(true);
+        setFormData({ firstName: "", lastName: "", email: "", company: "", message: "", _gotcha: "" });
+        setTimeout(() => setShowToast(false), 3000);
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error || "Submission failed. Please try again.");
+      }
+    } catch (err) {
+      alert("Connectivity error. Please check your network.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,10 +69,9 @@ const Contact = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto">
-        {/* Layout Wrapper: Center content on mobile, split on desktop */}
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-center lg:items-stretch text-center lg:text-left">
           
-          {/* LEFT: BRAND INFO & METADATA */}
+          {/* LEFT: BRAND INFO */}
           <div className="w-full lg:w-[40%] flex flex-col justify-between items-center lg:items-start">
             <div className="flex flex-col items-center lg:items-start">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/5 mb-8">
@@ -65,7 +89,6 @@ const Contact = () => {
               </p>
             </div>
 
-            {/* Technical Contact Points - Centered on mobile */}
             <div className="mt-12 space-y-6 w-full max-w-sm lg:max-w-none">
               <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/40 border border-white/60 backdrop-blur-xl group hover:bg-white/60 transition-all text-left">
                 <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/10 shrink-0">
@@ -92,13 +115,21 @@ const Contact = () => {
           {/* RIGHT: THE FORM */}
           <div className="w-full lg:w-[60%] flex justify-center">
             <div className="relative w-full max-w-[800px] p-8 md:p-12 lg:p-16 rounded-[3rem] bg-white/40 backdrop-blur-2xl border border-white/80 shadow-[0_40px_80px_-20px_rgba(23,62,53,0.12)] text-left">
-              {/* Subtle Pattern Overlay */}
               <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(circle_at_center,_#173E35_1px,_transparent_1px)] bg-[size:40px_40px] rounded-[3rem]" />
               
               <div className="relative z-10">
                 <h3 className="text-secondary font-black text-2xl md:text-3xl tracking-tighter mb-10">Get in touch</h3>
 
                 <form className="space-y-10" onSubmit={handleSubmit}>
+                  {/* Honeypot field - Invisible to users */}
+                  <input 
+                    type="text" 
+                    name="_gotcha" 
+                    value={formData._gotcha} 
+                    onChange={handleChange} 
+                    style={{ display: "none" }} 
+                  />
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                     <div className="relative group">
                       <label className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 block">First Name</label>
@@ -155,9 +186,10 @@ const Contact = () => {
                   <div className="pt-6 flex justify-center lg:justify-start">
                     <button
                       type="submit"
-                      className="group w-full sm:w-auto flex items-center justify-center gap-4 bg-primary text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-widest shadow-2xl shadow-primary/20 hover:bg-secondary transition-all active:scale-95"
+                      disabled={isSubmitting}
+                      className="group w-full sm:w-auto flex items-center justify-center gap-4 bg-primary text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-widest shadow-2xl shadow-primary/20 hover:bg-secondary transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {isSubmitting ? "Sending..." : "Send Message"}
                       <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
