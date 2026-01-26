@@ -26,19 +26,19 @@ const MarketplaceComingSoon = () => {
         >
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-secondary">
-            Registry Synchronization in Progress
+            System Deployment in Progress
           </span>
         </motion.div>
 
-        {/* Main Heading - Sourced from TE-CP */}
+        {/* Main Heading - Explicit Coming Soon */}
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="text-secondary font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.9] mb-8"
         >
-          The Future of <br />
-          <span className="text-primary-gradient italic tracking-normal">Climate Integrity.</span>
+          Marketplace <br />
+          <span className="text-primary-gradient italic tracking-normal">Coming Soon.</span>
         </motion.h1>
 
         {/* Subtext - Sourced from TE-CP */}
@@ -48,9 +48,9 @@ const MarketplaceComingSoon = () => {
           transition={{ delay: 0.2 }}
           className="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12"
         >
-          We are building a straightforward solution to a complex market. 
-          Our enterprise-grade marketplace is evolving to provide the governance 
-          and security expected by multinational organizations.
+          We are finalizing our enterprise-grade marketplace to ensure 
+          total climate integrity. Our platform is currently undergoing 
+          final registry synchronization and will be available shortly.
         </motion.p>
 
         {/* Feature Teasers */}
@@ -61,9 +61,9 @@ const MarketplaceComingSoon = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 text-left"
         >
           {[
-            { icon: <Database size={18}/>, label: "Direct Data Bridges", desc: "Registry-connected systems." },
-            { icon: <ShieldCheck size={18}/>, label: "Verified Impact", desc: "No ambiguity, only results." },
-            { icon: <Globe size={18}/>, label: "Global Scale", desc: "Multisector project access." }
+            { icon: <Database size={18}/>, label: "Registry Sync", desc: "Establishing real-time data bridges." },
+            { icon: <ShieldCheck size={18}/>, label: "Governance", desc: "Setting the standard for security." },
+            { icon: <Globe size={18}/>, label: "Access", desc: "Preparing global project pipelines." }
           ].map((item, i) => (
             <div key={i} className="p-6 rounded-3xl bg-white border border-secondary/5 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-primary mb-3">{item.icon}</div>
@@ -72,8 +72,6 @@ const MarketplaceComingSoon = () => {
             </div>
           ))}
         </motion.div>
-
-        
       </div>
     </div>
   );
