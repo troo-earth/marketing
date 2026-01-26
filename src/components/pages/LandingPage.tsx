@@ -37,7 +37,7 @@ const CarbonFlowCanvas = () => {
         
         this.size = Math.random() * 2 + 1;
         this.opacity = Math.random() * 0.5 + 0.3;
-        this.speed = Math.random() * 0.5 + 0.3;
+        this.speed = Math.random() * 3.0 + 2.0;
         
         // Brand colors: primary, secondary, accent
         const colors = ['#007473', '#173E35', '#FFB71B'];
