@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light;
+}
+
 @theme {
   --font-family-nunito: "Nunito Sans", sans-serif;
 
@@ -20,6 +24,8 @@ html {
 /* Global font application */
 body {
   font-family: var(--font-family-nunito);
+  background-color: #ffffff;
+  color: #111827;
 }
 @layer utilities {
   .bg-primary-gradient {
