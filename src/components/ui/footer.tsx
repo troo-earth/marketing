@@ -1,3 +1,4 @@
+// src/components/Footer.tsx
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { ArrowUpRight, Linkedin, Instagram, ArrowRight } from "lucide-react";
@@ -8,10 +9,8 @@ const Footer = () => {
   const navigate = useNavigate();
 
   const handleHashNavigation = (id: string) => {
-    // If not on home page, navigate home first, then scroll
     if (location.pathname !== "/") {
       navigate("/");
-      // Wait for navigation to complete, then scroll
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
@@ -23,7 +22,7 @@ const Footer = () => {
 
   return (
     <footer className="relative w-full pt-12 pb-8 overflow-hidden">
-      {/* Blueprint Grid Background - Referencing Watershed Style */}
+      {/* Blueprint Grid Background */}
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
@@ -34,6 +33,7 @@ const Footer = () => {
 
       <div className="max-w-[1800px] mx-auto px-6 md:px-12 lg:px-22 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-16 mb-12">
+          
           {/* ✅ COLUMN 1: BRAND IDENTITY */}
           <div className="lg:col-span-4 space-y-6">
             <HashLink
@@ -44,8 +44,8 @@ const Footer = () => {
               <img src={logo} alt="troo.earth" className="h-10 w-auto" />
             </HashLink>
             <p className="text-gray-500 font-medium text-base leading-relaxed max-w-sm">
-              Simplifying access to verified carbon credits for enterprises
-              through direct data bridges and secure technology.
+              Providing the foundational infrastructure for high-integrity 
+              environmental assets through secure data bridges and verified governance.
             </p>
             <div className="flex items-center gap-4">
               {[
@@ -74,6 +74,8 @@ const Footer = () => {
                 <a
                   key={i}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 rounded-xl bg-secondary/5 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all"
                 >
                   {social.icon}
@@ -85,7 +87,7 @@ const Footer = () => {
           {/* ✅ COLUMN 2: NAVIGATION */}
           <div className="lg:col-span-2 space-y-4 lg:pt-2">
             <h4 className="text-secondary font-black text-[10px] uppercase tracking-[0.3em]">
-              Platform
+              Ecosystem
             </h4>
             <div className="flex flex-col gap-3">
               <HashLink
@@ -104,12 +106,14 @@ const Footer = () => {
               >
                 Opportunity
               </HashLink>
-              <Link
-                to="/marketplace"
+              <a
+                href="https://atlas.troo.earth"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 font-bold text-sm hover:text-primary transition-colors flex items-center gap-1"
               >
-                Marketplace <ArrowUpRight size={12} />
-              </Link>
+                Troo Atlas <ArrowUpRight size={12} />
+              </a>
             </div>
           </div>
 
@@ -153,7 +157,7 @@ const Footer = () => {
                 Direct Access
               </h4>
               <p className="text-base font-black tracking-tighter mb-5 leading-tight relative z-10">
-                Ready to demonstrate measurable climate impact?
+                Ready to demonstrate measurable climate impact via Atlas?
               </p>
               <HashLink
                 smooth

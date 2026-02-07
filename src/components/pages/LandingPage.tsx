@@ -1,3 +1,4 @@
+// src/components/LandingPage.tsx
 import { useEffect, useRef } from "react";
 import { ArrowRight, Globe } from "lucide-react";
 
@@ -6,7 +7,6 @@ const CarbonFlowCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // SSR guard
     if (typeof window === "undefined") return;
     
     const canvas = canvasRef.current;
@@ -14,7 +14,6 @@ const CarbonFlowCanvas = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Define FlowParticle class BEFORE using it
     class FlowParticle {
       x: number;
       y: number;
@@ -27,41 +26,28 @@ const CarbonFlowCanvas = () => {
       trail: { x: number; y: number }[];
 
       constructor(canvas: HTMLCanvasElement) {
-        // Start from left side
         this.x = -20;
         this.y = Math.random() * canvas.height;
-        
-        // Flow to right side with curves
         this.targetX = canvas.width + 20;
         this.targetY = canvas.height * 0.5 + (Math.random() - 0.5) * canvas.height * 0.6;
-        
         this.size = Math.random() * 2 + 1;
         this.opacity = Math.random() * 0.5 + 0.3;
         this.speed = Math.random() * 3.0 + 2.0;
-        
-        // Brand colors: primary, secondary, accent
         const colors = ['#007473', '#173E35', '#FFB71B'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        
         this.trail = [];
       }
 
       update(canvas: HTMLCanvasElement) {
-        // Add current position to trail
         this.trail.push({ x: this.x, y: this.y });
-        
-        // Hard limit trail length to prevent memory leak
         if (this.trail.length > 12) {
           this.trail.shift();
         }
 
-        // Move towards target with sine wave
         const progress = this.x / canvas.width;
-        
         this.x += this.speed;
         this.y += Math.sin(progress * Math.PI * 3) * 0.5;
 
-        // Reset when off screen
         if (this.x > canvas.width + 20) {
           this.x = -20;
           this.y = Math.random() * canvas.height;
@@ -70,7 +56,6 @@ const CarbonFlowCanvas = () => {
       }
 
       draw(ctx: CanvasRenderingContext2D) {
-        // Draw particle with glow
         const gradient = ctx.createRadialGradient(
           this.x, this.y, 0,
           this.x, this.y, this.size * 3
@@ -83,7 +68,6 @@ const CarbonFlowCanvas = () => {
         ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
         ctx.fill();
         
-        // Core particle
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -91,14 +75,12 @@ const CarbonFlowCanvas = () => {
       }
     }
 
-    // NOW we can use FlowParticle type
     let particles: FlowParticle[] = [];
     let animationFrameId: number;
 
     const resize = () => {
-      // Defensive checks for SSR
-      canvas.width = canvas.offsetWidth || (typeof window !== "undefined" ? window.innerWidth : 800);
-      canvas.height = canvas.offsetHeight || (typeof window !== "undefined" ? window.innerHeight : 600);
+      canvas.width = canvas.offsetWidth || window.innerWidth;
+      canvas.height = canvas.offsetHeight || window.innerHeight;
     };
 
     const init = () => {
@@ -110,16 +92,13 @@ const CarbonFlowCanvas = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
       particles.forEach(particle => {
         particle.update(canvas);
         particle.draw(ctx);
       });
-      
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // Debounced resize handler to prevent reflow storms
     let resizeTimeout: number;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
@@ -150,12 +129,10 @@ const LandingPage = () => {
         <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary/20 rounded-full blur-[140px]" />
         <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-[5%] left-[10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[130px]" />
-        
-        {/* Signature Noise Texture */}
         <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       </div>
 
-      {/* Animated Carbon Flow Background - Desktop only */}
+      {/* Animated Carbon Flow Background */}
       <div className="absolute inset-0 pointer-events-none">
         <CarbonFlowCanvas />
       </div>
@@ -165,25 +142,25 @@ const LandingPage = () => {
         {/* --- HERO CONTENT --- */}
         <section className="flex flex-col items-center justify-center text-center flex-grow">
           
-          {/* High-Impact Typography */}
           <h1 className="text-secondary font-black text-[50px] sm:text-[60px] md:text-[80px] lg:text-[80px] xl:text-[95px] leading-[0.9] tracking-tighter mb-8 max-w-5xl">
             Turning Commitments <br />
             <span className="text-primary-gradient italic">into Action.</span>
           </h1>
 
-          {/* Refined Subtext */}
-          <p className="text-secondary/70 font-medium text-base md:text-[24px] xl:text-xl max-w-2xl leading-relaxed mb-10">
-            troo.earth is a digital marketplace purpose-built for corporate climate action. 
-            Connect to verified projects through an ecosystem of trust and clarity.
+          <p className="text-secondary/70 font-medium text-base md:text-[24px] xl:text-xl max-w-3xl leading-relaxed mb-10">
+            troo.earth is the infrastructure for a regenerative future. 
+            We provide the ecosystem for seamless climate capital deployment, 
+            bridging high-integrity projects with scalable corporate and consumer solutions.
           </p>
 
-          {/* Primary CTA Block */}
           <div className="flex flex-col sm:flex-row items-center gap-10">
             <a 
-              href="/marketplace"
+              href="https://atlas.troo.earth"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-lg shadow-2xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all flex items-center gap-4 overflow-hidden"
             >
-              <span className="relative z-10">Get Started</span>
+              <span className="relative z-10">Explore Atlas</span>
               <ArrowRight size={20} className="relative z-10 text-accent group-hover:translate-x-1 transition-transform" />
               <div className="absolute inset-0 bg-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
