@@ -1,124 +1,6 @@
 // src/components/LandingPage.tsx
-import { useEffect, useRef } from "react";
 import { ArrowRight, Globe } from "lucide-react";
-
-// --- UNIQUE CARBON FLOW ANIMATION ---
-const CarbonFlowCanvas = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    class FlowParticle {
-      x: number;
-      y: number;
-      targetX: number;
-      targetY: number;
-      size: number;
-      opacity: number;
-      speed: number;
-      color: string;
-      trail: { x: number; y: number }[];
-
-      constructor(canvas: HTMLCanvasElement) {
-        this.x = -20;
-        this.y = Math.random() * canvas.height;
-        this.targetX = canvas.width + 20;
-        this.targetY = canvas.height * 0.5 + (Math.random() - 0.5) * canvas.height * 0.6;
-        this.size = Math.random() * 2 + 1;
-        this.opacity = Math.random() * 0.5 + 0.3;
-        this.speed = Math.random() * 3.0 + 2.0;
-        const colors = ['#007473', '#173E35', '#FFB71B'];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.trail = [];
-      }
-
-      update(canvas: HTMLCanvasElement) {
-        this.trail.push({ x: this.x, y: this.y });
-        if (this.trail.length > 12) {
-          this.trail.shift();
-        }
-
-        const progress = this.x / canvas.width;
-        this.x += this.speed;
-        this.y += Math.sin(progress * Math.PI * 3) * 0.5;
-
-        if (this.x > canvas.width + 20) {
-          this.x = -20;
-          this.y = Math.random() * canvas.height;
-          this.targetY = canvas.height * 0.5 + (Math.random() - 0.5) * canvas.height * 0.6;
-        }
-      }
-
-      draw(ctx: CanvasRenderingContext2D) {
-        const gradient = ctx.createRadialGradient(
-          this.x, this.y, 0,
-          this.x, this.y, this.size * 3
-        );
-        gradient.addColorStop(0, `${this.color}${Math.floor(this.opacity * 255).toString(16).padStart(2, '0')}`);
-        gradient.addColorStop(1, `${this.color}00`);
-        
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
-        ctx.fill();
-        
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    let particles: FlowParticle[] = [];
-    let animationFrameId: number;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth || window.innerWidth;
-      canvas.height = canvas.offsetHeight || window.innerHeight;
-    };
-
-    const init = () => {
-      particles = [];
-      for (let i = 0; i < 50; i++) {
-        particles.push(new FlowParticle(canvas));
-      }
-    };
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(particle => {
-        particle.update(canvas);
-        particle.draw(ctx);
-      });
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    let resizeTimeout: number;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resize, 150);
-    };
-
-    window.addEventListener("resize", handleResize);
-    resize();
-    init();
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", handleResize);
-      clearTimeout(resizeTimeout);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="w-full h-full opacity-40" />;
-};
+import CarbonNetwork3D from "../ui/CarbonNetworkCanvas"; // Update your path accordingly
 
 const LandingPage = () => {
   return (
@@ -132,16 +14,14 @@ const LandingPage = () => {
         <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       </div>
 
-      {/* Animated Carbon Flow Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <CarbonFlowCanvas />
+      {/* --- REPLACED: NEW 3D NETWORK BACKGROUND --- */}
+      <div className="absolute inset-0 z-0">
+        <CarbonNetwork3D />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl h-screen flex flex-col justify-between px-6 pt-32 pb-24 md:py-16 lg:pb-20 lg:pt-32">
-        
         {/* --- HERO CONTENT --- */}
         <section className="flex flex-col items-center justify-center text-center flex-grow">
-          
           <h1 className="text-secondary font-black text-[50px] sm:text-[60px] md:text-[80px] lg:text-[80px] xl:text-[95px] leading-[0.9] tracking-tighter mb-8 max-w-5xl">
             Turning Commitments <br />
             <span className="text-primary-gradient italic">into Action.</span>
@@ -176,9 +56,7 @@ const LandingPage = () => {
             </div>
           </div>
         </section>
-        
       </div>
-
       <style>{`
         .animate-spin-slow {
           animation: spin 8s linear infinite;
