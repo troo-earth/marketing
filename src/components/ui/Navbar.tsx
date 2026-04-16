@@ -25,7 +25,7 @@ const Navbar = () => {
     },
     { label: "What We Do", id: "what-we-do" },
     { label: "Opportunity", id: "market-dynamics" },
-    { label: "Meet the Team", id: "meet-the-team" },
+    //{ label: "Meet the Team", id: "meet-the-team" },
     { label: "Contact Us", id: "contact-us" },
   ];
 

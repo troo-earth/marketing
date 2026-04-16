@@ -108,7 +108,7 @@ const TeamAndOpportunity = () => {
       </section>
 
       {/* --- SECTION 2: THE LEADERSHIP --- */}
-      <section
+      {/* <section
         id="meet-the-team"
         className="relative z-10 w-full min-h-screen flex items-center py-20 px-6 md:px-12 lg:px-20 xl:px-24"
       >
@@ -237,7 +237,7 @@ const TeamAndOpportunity = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
