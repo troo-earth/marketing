@@ -4,12 +4,10 @@ import {
   ShieldCheck,
   Zap,
   Gauge,
-  ArrowRight,
-  Fingerprint,
 } from "lucide-react";
-import { Link } from "react-router-dom";
-import Cliff from "../../assets/cliff.webp";
-import Basil from "../../assets/Basil.webp";
+// import { Link } from "react-router-dom";
+// import Cliff from "../../assets/cliff.webp";
+// import Basil from "../../assets/Basil.webp";
 
 const TeamAndOpportunity = () => {
   const userBenefits = [
