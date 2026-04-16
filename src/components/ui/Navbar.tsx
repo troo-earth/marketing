@@ -20,7 +20,7 @@ const Navbar = () => {
       isDropdown: true,
       children: [
         { label: "Troo Atlas", href: "https://atlas.troo.earth", tag: "Simulation", isExternal: true },
-        { label: "Troo Offset", tag: "Coming Soon", isComingSoon: true }
+        { label: "Troo Bridge", tag: "Coming Soon", isComingSoon: true }
       ]
     },
     { label: "What We Do", id: "what-we-do" },
@@ -174,7 +174,7 @@ const Navbar = () => {
                   Troo Atlas <span className="text-[10px] align-middle ml-2 px-2 py-0.5 rounded-full bg-accent/10 text-accent">Simulation</span>
                 </a>
                 <p className="text-xl font-black text-secondary/30 mobile-menu-item">
-                  Troo Offset <span className="text-[10px] align-middle ml-2 font-normal italic">Coming Soon</span>
+                  Troo Bridge <span className="text-[10px] align-middle ml-2 font-normal italic">Coming Soon</span>
                 </p>
               </div>
               
